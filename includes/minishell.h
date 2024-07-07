@@ -13,8 +13,8 @@
 #include <errno.h>
 #include <signal.h>
 #include <termios.h>
-#include <curses.h>
-#include <term.h>
+// #include <curses.h>
+// #include <term.h>
 
 
 
