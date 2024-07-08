@@ -6,11 +6,11 @@
 /*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:37:08 by tiima             #+#    #+#             */
-/*   Updated: 2024/07/07 19:14:23 by tiima            ###   ########.fr       */
+/*   Updated: 2024/07/08 18:04:32 by tiima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/minishell.h"
+# include "../../includes/minishell.h"
 
 static int nb_args(char **args)
 {
@@ -31,7 +31,7 @@ int echo(char **args)
     i = 1;
     if (nb_args(args) > 1)
     {
-        if (args[i] && !ft_strcmp(args[i], "-n"))
+        if (args[i] && !strcmp(args[i], "-n"))
         {
             i++;
             n_flag = 0;
