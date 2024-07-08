@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 16:17:08 by fbazaz            #+#    #+#             */
-/*   Updated: 2023/11/22 10:48:00 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/08 18:58:37 by tiima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-/* #include <stdio.h>
-#include <string.h>
-int main()
-{
-	char	*str;
+// #include <stdio.h>
+// #include <string.h>
+// int main()
+// {
+// 	char	*str;
 	
-	str = ft_strchr("hello tiima", 't');
-	printf("%s\n", str);
-	printf("%s", strchr("hello tiima", 't'));
-} */
+// 	str = ft_strchr("hello tiima", 't');
+// 	printf("%s\n", str);
+// 	printf("%s", strchr("hello tiima", 't'));
+// }

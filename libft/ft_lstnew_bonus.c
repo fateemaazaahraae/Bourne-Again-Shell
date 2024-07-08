@@ -1,23 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 17:36:58 by fbazaz            #+#    #+#             */
-/*   Updated: 2023/11/21 16:10:01 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/08 19:05:12 by tiima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-/**
- * ft_lstnew - Allocates and returns a new node.
- * @content: The content to create the node with.
- *
- * Return: The new node.
- */
 
 t_list	*ft_lstnew(void *content)
 {
