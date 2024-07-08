@@ -6,9 +6,9 @@
 /*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 15:40:55 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/08 17:21:20 by tiima            ###   ########.fr       */
+/*   Updated: 2024/07/08 18:14:42 by tiima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../includes/minishell.h"
+# include "../../../includes/minishell.h"
 

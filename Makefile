@@ -6,7 +6,7 @@
 #    By: tiima <tiima@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/08 17:05:39 by tiima             #+#    #+#              #
-#    Updated: 2024/07/08 18:09:04 by tiima            ###   ########.fr        #
+#    Updated: 2024/07/08 18:14:01 by tiima            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LIBS = -lreadline
 INCLUDES = -Iincludes
 LIBFT = libft/libft.a
 SRC = ./src/main.c 
-EXECUTION_SRC = ./src/builtins/cd.c ./src/builtins/echo.c
+EXECUTION_SRC = ./src/execution/builtins/cd.c ./src/execution/builtins/echo.c
 PARCING_SRC = ./src/parcing/hello.c
 
 OBJ = $(SRC:.c=.o) $(EXECUTION_SRC:.c=.o) $(PARCING_SRC:.c=.o)

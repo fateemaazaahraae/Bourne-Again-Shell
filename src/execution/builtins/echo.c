@@ -6,11 +6,11 @@
 /*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:37:08 by tiima             #+#    #+#             */
-/*   Updated: 2024/07/08 18:04:32 by tiima            ###   ########.fr       */
+/*   Updated: 2024/07/08 18:14:47 by tiima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../includes/minishell.h"
+# include "../../../includes/minishell.h"
 
 static int nb_args(char **args)
 {
