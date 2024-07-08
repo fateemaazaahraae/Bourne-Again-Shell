@@ -1,6 +1,24 @@
-# include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/08 16:40:49 by tiima             #+#    #+#             */
+/*   Updated: 2024/07/08 16:44:43 by tiima            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+# include "includes/minishell.h"
 
 int main()
 {
-    printf("Bourne-Again-Shell\n");
+    char *str;
+
+    while (1)
+    {
+        str = readline("\x1b[32mminishell $> \x1b[0m");
+        printf("%s\n", str);
+    }
 }
