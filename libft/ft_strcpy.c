@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 13:49:40 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/09 12:12:56 by fbazaz           ###   ########.fr       */
+/*   Created: 2024/07/09 14:19:30 by fbazaz            #+#    #+#             */
+/*   Updated: 2024/07/09 14:19:44 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+# include "libft.h"
 
-void	ft_putendl_fd(char *s, int fd)
-{
-	int i;
-
-	if (fd < 0)
-		return ;
-	i = 0;
-	while (s[i])
-	{
-		write(1, &s[i], 1);
-		i++;
-	}
-	ft_putchar_fd('\n', fd);
-}
+char    *ft_strcpy(char *s1, char *s2)
+  {
+      int i;
+ 
+      i = 0;
+      while (s2[i])
+      {
+          s1[i] = s2[i];
+          i++;
+      }
+      s1[i] = s2[i];
+      return (s1);
+  }

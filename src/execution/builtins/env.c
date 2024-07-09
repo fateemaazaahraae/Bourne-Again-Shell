@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 13:49:40 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/09 12:12:56 by fbazaz           ###   ########.fr       */
+/*   Created: 2024/07/09 14:29:38 by fbazaz            #+#    #+#             */
+/*   Updated: 2024/07/09 14:30:46 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+# include "../../../includes/minishell.h"
 
-void	ft_putendl_fd(char *s, int fd)
+void    env(t_env *env)
 {
-	int i;
-
-	if (fd < 0)
-		return ;
-	i = 0;
-	while (s[i])
-	{
-		write(1, &s[i], 1);
-		i++;
-	}
-	ft_putchar_fd('\n', fd);
+    while (env)
+    {
+        printf("%s=%s\n", env->key, env->value);
+        env = env->next;
+    }
 }

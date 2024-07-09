@@ -21,6 +21,10 @@
 // #include <curses.h>
 // #include <term.h>
 
-int echo(char **args);
+typedef struct s_minishell
+{
+    t_env *env;
+} t_minishell;
+
 
 #endif

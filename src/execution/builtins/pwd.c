@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 13:49:40 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/09 12:12:56 by fbazaz           ###   ########.fr       */
+/*   Created: 2024/07/09 14:11:04 by fbazaz            #+#    #+#             */
+/*   Updated: 2024/07/09 14:26:34 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+# include "../../../includes/minishell.h"
 
-void	ft_putendl_fd(char *s, int fd)
+void    pwd(t_env *env)
 {
-	int i;
-
-	if (fd < 0)
-		return ;
-	i = 0;
-	while (s[i])
-	{
-		write(1, &s[i], 1);
-		i++;
-	}
-	ft_putchar_fd('\n', fd);
+    while (env)
+    {
+        if (!ft_strcmp(env->key, "PWD"))
+        {
+            printf("%s\n", env->value);
+            return ;
+        }
+        env = env->next;
+    }
 }
