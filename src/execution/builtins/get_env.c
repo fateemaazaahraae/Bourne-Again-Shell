@@ -6,7 +6,7 @@
 /*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:39:09 by tiima             #+#    #+#             */
-/*   Updated: 2024/07/08 20:01:31 by tiima            ###   ########.fr       */
+/*   Updated: 2024/07/08 20:10:44 by tiima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_env   *get_env(char **env)
     int i;
 
     i = 0;
+    head = NULL;
     while(env[i])
     {
         str = ft_strchr(env[i], '=');
@@ -69,7 +70,7 @@ t_env   *get_env(char **env)
         {
             *str = '\0';
             new = ft_lstnew2(env[i], str + 1);
-            printf("key: %s && value: %s\n", new->key, new->value);
+            printf("%s=%s\n", new->key, new->value);
             *str = '=';
             ft_lstadd_back2(&head, new);
         }
