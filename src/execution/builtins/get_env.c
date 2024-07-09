@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:39:09 by tiima             #+#    #+#             */
-/*   Updated: 2024/07/08 20:10:44 by tiima            ###   ########.fr       */
+/*   Updated: 2024/07/09 14:13:02 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_env   *get_env(char **env)
         {
             *str = '\0';
             new = ft_lstnew2(env[i], str + 1);
-            printf("%s=%s\n", new->key, new->value);
+            // printf("%s=%s\n", new->key, new->value);
             *str = '=';
             ft_lstadd_back2(&head, new);
         }

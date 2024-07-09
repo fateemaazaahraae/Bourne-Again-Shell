@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fill.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/08 16:40:49 by tiima             #+#    #+#             */
-/*   Updated: 2024/07/09 18:28:45 by aakouhar         ###   ########.fr       */
+/*   Created: 2024/07/09 14:49:00 by aakouhar          #+#    #+#             */
+/*   Updated: 2024/07/09 17:51:31 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/minishell.h"
+# include "../../includes/minishell.h"
 
-int main(int ac, char **av, char **env)
+//in this function i will fill the return of split into a linked list
+void    ft_fill_tokens(char *cmd)
 {
-    char *str;
-    t_env *my_env;
-    (void)ac;
-    (void)av;
-    (void)my_env;
+    char **str;
+    t_list *p_tokens;
+    t_list  *new;
 
-    my_env = get_env(env);
-    while (1)
+    str = ft_split(cmd, '|');
+    int i = -1;
+    p_tokens = NULL;
+    while (str[++i])
     {
-        str = readline("\x1b[32mminishell $> \x1b[0m");
-        solve_pipe_problem(str);
-        ft_fill_tokens(str);
-        //return_pipe()
+        new = ft_lstnew(str[i]);
+        ft_lstadd_back(&p_tokens, new);
+        free(str[i]);
     }
+    free(str);
 }

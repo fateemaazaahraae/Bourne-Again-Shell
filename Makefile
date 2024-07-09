@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tiima <tiima@student.42.fr>                +#+  +:+       +#+         #
+#    By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/08 17:05:39 by tiima             #+#    #+#              #
-#    Updated: 2024/07/08 19:30:34 by tiima            ###   ########.fr        #
+#    Updated: 2024/07/09 18:52:11 by aakouhar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIBFT = libft/libft.a
 
 SRC = ./src/main.c 
 EXECUTION_SRC = ./src/execution/builtins/cd.c ./src/execution/builtins/echo.c ./src/execution/builtins/get_env.c
-PARCING_SRC = ./src/parcing/hello.c
+PARCING_SRC = ./src/parcing/fill.c ./src/parcing/check.c ./src/parcing/errors.c
 
 OBJ = $(SRC:.c=.o) $(EXECUTION_SRC:.c=.o) $(PARCING_SRC:.c=.o)
 
