@@ -6,7 +6,7 @@
 /*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 19:09:06 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/09 15:14:34 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/07/10 11:59:15 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,8 @@
 // 	}
 // 	else
 // 		*lst = new;
-// }
-t_list    *ft_lstlast(t_list *lst)
-{
-    while (lst)
-    {
-        if (!lst->next)
-            return (lst);
-        lst = lst->next;
-    }
-    return (lst);
-}
+// }turn (lst);
+
 
 void ft_lstadd_back(t_list **lst, t_list *new)
 {
