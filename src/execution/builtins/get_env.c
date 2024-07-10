@@ -3,23 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
-/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/08 18:39:09 by tiima             #+#    #+#             */
-/*   Updated: 2024/07/09 13:47:03 by fbazaz           ###   ########.fr       */
-=======
 /*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/08 18:39:09 by tiima             #+#    #+#             */
-/*   Updated: 2024/07/09 14:13:02 by aakouhar         ###   ########.fr       */
->>>>>>> 5ef2f3d8bfd47488cbd158d68b9c6fb409dc3cda
+/*   Created: 2024/07/10 10:09:46 by aakouhar          #+#    #+#             */
+/*   Updated: 2024/07/10 10:10:32 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 # include "../../../includes/minishell.h"
 
-static int	ft_lstsize2(t_env *lst)
+/* static int	ft_lstsize2(t_env *lst)
 {
 	int	counter;
 
@@ -30,7 +24,7 @@ static int	ft_lstsize2(t_env *lst)
 		lst = lst->next;
 	}
 	return (counter);
-}
+} */
 
 t_env   *get_env(char **env)
 {

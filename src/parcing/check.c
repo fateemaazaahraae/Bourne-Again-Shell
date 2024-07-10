@@ -6,7 +6,7 @@
 /*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 16:01:38 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/07/09 19:01:17 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/07/10 10:36:02 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void check_synthax_error(char c)
 
     char *check;
 
-    check = "&()`/,;:[]*";
+    check = "&()`/,;[]*";
     i = -1;
     while (check[++i])
     {
