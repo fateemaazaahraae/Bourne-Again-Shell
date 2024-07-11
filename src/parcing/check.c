@@ -6,7 +6,7 @@
 /*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 16:01:38 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/07/10 10:36:02 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/07/11 14:06:35 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ void    solve_pipe_problem(char *str)
     {
         if (str[i] == '\"' && d_quate == false)
             d_quate = true;
-        if (str[i] == '\"' && d_quate == true)  
+        else if (str[i] == '\"' && d_quate == true)  
             d_quate = false;
-        if (str[i] == '\'' && s_quate == false)
+        else if (str[i] == '\'' && s_quate == false)
             s_quate = true;
-        if (str[i] == '\'' && s_quate == true)  
+        else if (str[i] == '\'' && s_quate == true)  
             s_quate = false;
-        if (str[i] == '|' && (s_quate == true || d_quate == true))
+        else if (str[i] == '|' && (s_quate == true || d_quate == true))
             str[i] *= -1;
-        if (str[i] == '|' && str[i + 1] == '|' && s_quate == false && d_quate == false)
+        else if (str[i] == '|' && str[i + 1] == '|' && s_quate == false && d_quate == false)
             print_error('s');
         check_synthax_error(str[i]);
     }
