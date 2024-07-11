@@ -6,7 +6,7 @@
 /*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:49:00 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/07/10 10:17:51 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/07/11 10:32:40 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,13 @@ void    ft_fill_tokens(char *cmd)
         ft_lstadd_back(&p_tokens, new);
         free(str[i]);
     }
-    while (p_tokens)
+/*     while (p_tokens)
     {
         printf("%s\n", p_tokens->content);
         p_tokens = p_tokens->next;
-    }
+    } */
     free(str);
+    split_tokens(p_tokens); //this function is for spliting tokens by space this time not by pipe
+    
+    
 }
