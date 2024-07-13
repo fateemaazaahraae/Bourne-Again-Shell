@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   fill.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:49:00 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/07/11 16:44:02 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/13 12:02:27 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../includes/minishell.h"
 
-void split_tokens(t_list **p_tokens)
+/* void split_tokens(t_list **p_tokens)
 {
     t_list *tmp;
 
@@ -56,4 +56,53 @@ void    return_pipe(t_list **p_tokens)
                 tmp->content[i] *= (-1);       
         tmp = tmp->next;
     }
+} */
+int ft_fill_tokens(t_list **p_tokens, char *str) // "'hello'"
+{
+    int i;
+    int start;
+    int end;
+    int flag;
+    t_list *new;
+
+    i = -1;
+    end = 0;
+    while (str[++i])
+    {
+        start = end;
+        if (str[i] == ' ' || str[i] == '\t' || str[i] == '\n') // ls -la 
+            end = i;
+        else if (str[i] == '>' || '<')
+        {
+            end = i;
+        }
+        else if (str[i] == '\"' || str[i] == '\'')
+        {
+            start = i;
+            end = reach_end_of_quote(str, i);
+        }
+        start = i;
+        new = ft_lstnew(ft_substr(str, start, end));
+        ft_lstadd_back(p_tokens, new);
+   }
+   return (0);
+}
+
+
+int reach_end_of_quote(char *str, int index)
+{
+    int i;
+    char c;
+    
+    i = index - 1;
+    if (str[index] == '\'')
+        c = '\''; //""'hello'""
+    else
+        c = '\"';
+    while (str[++i])
+    {
+        if (str[i] == c)
+            return (i);
+    }
+    return (-1);
 }

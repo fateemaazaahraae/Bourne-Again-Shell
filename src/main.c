@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:40:49 by tiima             #+#    #+#             */
-/*   Updated: 2024/07/11 16:40:24 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/13 11:19:42 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,19 @@ int main(int ac, char **av, char **env)
     (void)av;
     (void)my_env;
     (void)env;
-    int i;
-
+    // int i;
+// ls -la>"he was fun"|cat "he was fun" -----> ls    -la  >|   he was fun  |   cat  he was fun
     p_tokens = NULL;
     //my_env = get_env(env);
     while (1)
     {
         str = readline("\x1b[32mminishell $> \x1b[0m");
-        solve_pipe_problem(str);
+        // solve_pipe_problem(str);
         ft_fill_tokens(str, &p_tokens);
-        split_tokens(&p_tokens); //this function is for spliting tokens by space this time not by pipe
+        // split_tokens(&p_tokens); //this function is for spliting tokens by space this time not by pipe
         while (p_tokens)
         {
-            i = -1;
             printf("token --> %s\n", p_tokens->content);
-            while (p_tokens->mini_tokens[++i])
-                printf("mini ---> %s\n", p_tokens->mini_tokens[i]);
             p_tokens = p_tokens->next;
         }
     }

@@ -6,7 +6,7 @@
 /*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:07:43 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/07/11 11:25:13 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/07/12 16:20:39 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef enum t_type{
 typedef struct s_list
 {
 	char			*content;
-	char 			**mini_tokens;
+	//char 			**mini_tokens;
 	e_type			*type;
 	struct s_list	*next;
 }			t_list;
