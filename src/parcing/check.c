@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 16:01:38 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/07/11 16:42:53 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/11 19:11:04 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void    solve_pipe_problem(char *str)
     s_quote = false;
     while (str[++i])
     { 
-        if (str[i] == '\"')
+        if (str[i] == '\"' && !s_quote)
             d_quote = !d_quote;
-        else if (str[i] == '\'')
+        else if (str[i] == '\'' && !d_quote)
             s_quote = !s_quote;
         else if (str[i] == '|' && (s_quote || d_quote))
             str[i] *= -1;

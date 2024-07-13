@@ -30,5 +30,7 @@ int main(int ac, char **av, char **envp)
             unset(ho, my_env);
         else if (!strcmp(ho[0], "export"))
             export(ho, my_env);
+        else if (!strcmp(ho[0], "echo"))
+            echo(ho);
     }
 }
