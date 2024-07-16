@@ -22,10 +22,16 @@
 // #include <curses.h>
 // #include <term.h>
 
-typedef struct s_minishell
+typedef struct s_data
 {
-    t_env *env;
-} t_minishell;
+    t_list *list;
+    char **my_env;
+    char    *cmd;
+    char    *new_cmd;
+    int status;
+    bool d_quote;
+    bool s_quote;
+} t_data;
 
 
 #endif

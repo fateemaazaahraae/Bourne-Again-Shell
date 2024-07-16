@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:31 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/07/11 14:08:59 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/15 15:19:24 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void print_error(char c)
+int print_error(t_data *data, char c)
 {
     if (c == 's')
     {
         printf("synthax error\n");
-        // exit (127);
+        data->status = 1;
     }
-    // return (0);
+    return (data->status);
 }
