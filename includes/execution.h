@@ -16,6 +16,7 @@ int echo(char **args);
 t_env   *get_env(char **env);
 t_env *ft_lstnew2(char *name, char *value);
 void ft_lstadd_back2(t_env **lst, t_env *new);
+int	ft_lstsize2(t_env *lst);
 
 /* --cd.c-- */
 void    cd(char **args, t_env *env);

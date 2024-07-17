@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   exec_non_builtin.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/10 10:13:31 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/07/15 15:19:24 by aakouhar         ###   ########.fr       */
+/*   Created: 2024/07/17 13:10:58 by fbazaz            #+#    #+#             */
+/*   Updated: 2024/07/17 13:24:35 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+# include "../../includes/minishell.h"
 
-int print_error(t_data *data, char c)
+void    execute_non_builtin(t_data *data)
 {
-    if (c == 's')
-    {
-        printf("synthax error\n");
-        data->status = 1;
-    }
-    return (data->status);
+    
 }

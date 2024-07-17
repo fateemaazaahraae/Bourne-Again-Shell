@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:09:46 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/07/10 10:10:32 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/07/16 12:21:48 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 # include "../../../includes/minishell.h"
 
-/* static int	ft_lstsize2(t_env *lst)
+int	ft_lstsize2(t_env *lst)
 {
 	int	counter;
 
@@ -24,7 +24,7 @@
 		lst = lst->next;
 	}
 	return (counter);
-} */
+}
 
 t_env   *get_env(char **env)
 {

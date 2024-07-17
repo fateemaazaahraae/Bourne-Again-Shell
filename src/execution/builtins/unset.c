@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 15:41:31 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/09 16:06:11 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/16 14:27:41 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void    unset_var(t_env **env, char *key)
 void    unset(char **args, t_env *env)
 {
     int i;
-    t_env *tmp;
+    // t_env *tmp;
 
     i = 1;
     if (!args[i])

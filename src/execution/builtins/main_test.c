@@ -18,7 +18,8 @@ int main(int ac, char **av, char **envp)
     // }
     while (1)
     {
-        str = readline("minishell $>  ");
+        str = readline("minishell$>  ");
+        add_history(str);
         char **ho = ft_split(str, ' ');
         if (!strcmp(ho[0], "cd"))
             cd(ho, my_env);
