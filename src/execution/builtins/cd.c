@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 15:40:55 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/10 10:09:11 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/07/17 18:00:43 by tiima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void    cd(char **args, t_env *env)
     //char s[100];
 
     update_old_pwd(env);
-    if (!args[1])
+    if (!args[1] || !ft_strcmp(args[1], "~"))
         go_to_home(env);
     else 
         if (chdir(args[1]))

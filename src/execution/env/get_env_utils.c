@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 13:40:44 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/09 18:44:37 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/17 16:04:21 by tiima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_env *ft_lstnew2(char *name, char *value)
     return (new);
 }
 
-static t_env    *ft_lstlast2(t_env *lst)
+t_env    *ft_lstlast2(t_env *lst)
 {
 	while (lst)
 	{

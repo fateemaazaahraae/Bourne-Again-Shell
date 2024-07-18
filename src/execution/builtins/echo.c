@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:37:08 by tiima             #+#    #+#             */
-/*   Updated: 2024/07/09 16:13:12 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/17 17:57:26 by tiima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int echo(char **args)
 
     n_flag = 1;
     i = 1;
+    // printf("hello\n");
     if (nb_args(args) > 1)
     {
         if (args[i] && !ft_strcmp(args[i], "-n"))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 12:16:28 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/17 13:11:31 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/17 17:52:45 by tiima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,17 @@ int is_builtin(char *command)
 
 int execute(t_data *data)
 {
-    if (ft_lstsize2(data->my_env) == 1)
-    {
-        if (is_builtin(data->list->mini_tokens[0]))
-            execute_builtin(data);
-        else
-            execute_non_builtin(data);
-    }
+        // printf("hello\n");
+    // if (ft_lstsize2(data->my_env) == 1)
+    // {
+        int pid = fork();
+        if (pid == 0)
+        {
+            if (is_builtin(data->list->mini_tokens[0]))
+                execute_builtin(data);
+            else
+                execute_non_builtin(data);
+        }
+
+    // }
 }

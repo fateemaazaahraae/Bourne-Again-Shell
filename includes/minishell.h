@@ -14,15 +14,15 @@
 # include <errno.h>
 # include <signal.h>
 # include <termios.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "../libft/libft.h"
 # include "execution.h"
 # include "parcing.h"
 // #include <curses.h>
 // #include <term.h>
 
-typedef struct s_data
+/* typedef struct s_data
 {
     t_list  *list;
     t_env   *my_env;
@@ -31,7 +31,7 @@ typedef struct s_data
     int     status;
     bool    d_quote;
     bool    s_quote;
-} t_data;
+} t_data; */
 
 
 #endif
