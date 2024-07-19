@@ -1,3 +1,13 @@
+/*  #include <stdio.h>
+#include <string.h>
+int main()
+{
+    char dest[10] = "hello ";
+    char src[5] = "world";
+    int i = strlcat(dest, src, 3);
+    printf("%i --> %s\n", i, dest);
+} */
+
 #include <stdio.h>
 #include <string.h>
 

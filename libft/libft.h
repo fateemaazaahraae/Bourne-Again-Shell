@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/10 10:07:43 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/07/12 16:20:39 by aakouhar         ###   ########.fr       */
+/*   Created: 2023/11/01 09:55:44 by fbazaz            #+#    #+#             */
+/*   Updated: 2024/07/18 17:04:47 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef LIBFT_H
 # define LIBFT_H
@@ -17,7 +16,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
-# include <stdio.h>
 
 typedef enum t_type{
 	WRD,
@@ -29,7 +27,7 @@ typedef enum t_type{
 typedef struct s_list
 {
 	char			*content;
-	//char 			**mini_tokens;
+	char 			**mini_tokens;
 	e_type			*type;
 	struct s_list	*next;
 }			t_list;
@@ -43,7 +41,6 @@ size_t	ft_strlen(const char *s);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-char    *ft_strcpy(char *s1, char *s2);
 size_t	ft_strlcpy(char *dest, char *src, size_t dest_size);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
 int		ft_atoi(const char *str);
@@ -79,6 +76,5 @@ t_list	*ft_lstlast(t_list *lst);
 void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
-int	ft_strcmp(char *s1, char *s2);
 
 #endif

@@ -1,42 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/02 16:17:08 by fbazaz            #+#    #+#             */
-/*   Updated: 2023/11/22 10:48:00 by fbazaz           ###   ########.fr       */
+/*   Created: 2023/11/02 18:00:06 by fbazaz            #+#    #+#             */
+/*   Updated: 2023/11/23 09:09:40 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+void	*ft_calloc(size_t count, size_t size)
 {
-	int		i;
-	int		len;
-	char	*str;
+	void	*ptr;
 
-	i = 0;
-	len = ft_strlen(s);
-	str = (char *)s;
-	while (i <= len)
-	{
-		if (str[i] == (char)c)
-			return (&str[i]);
-		i++;
-	}
-	return (NULL);
+	ptr = (void *)malloc(count * size);
+	if (ptr == NULL)
+		return (NULL);
+	ft_bzero(ptr, (count * size));
+	return (ptr);
 }
 
 /* #include <stdio.h>
-#include <string.h>
+#include <limits.h>
+
 int main()
 {
-	char	*str;
-	
-	str = ft_strchr("hello tiima", 't');
-	printf("%s\n", str);
-	printf("%s", strchr("hello tiima", 't'));
+    char *ptr = ft_calloc(4 , sizeof(INT_MAX));
+    int i = 0;
+    while (i < 4)
+    {
+        printf("%i\n", ptr[i]);
+        i++;
+    }
 } */

@@ -1,42 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/02 16:17:08 by fbazaz            #+#    #+#             */
-/*   Updated: 2023/11/22 10:48:00 by fbazaz           ###   ########.fr       */
+/*   Created: 2023/11/02 16:58:54 by fbazaz            #+#    #+#             */
+/*   Updated: 2023/11/22 12:21:19 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strrchr(const char *s, int c)
 {
-	int		i;
-	int		len;
+	size_t	length;
 	char	*str;
 
-	i = 0;
-	len = ft_strlen(s);
 	str = (char *)s;
-	while (i <= len)
+	length = ft_strlen(s);
+	while (length >= 0)
 	{
-		if (str[i] == (char)c)
-			return (&str[i]);
-		i++;
+		if (str[length] == (char)c)
+			return (str + length);
+		if (length == 0)
+			break ;
+		length--;
 	}
 	return (NULL);
 }
 
 /* #include <stdio.h>
 #include <string.h>
-int main()
+
+int	main()
 {
 	char	*str;
-	
-	str = ft_strchr("hello tiima", 't');
-	printf("%s\n", str);
-	printf("%s", strchr("hello tiima", 't'));
+	str = ft_strrchr("tiima", 'i');
+	printf("%s", str);
+	//printf("%s", strrchr("tiima", 'i'));
 } */

@@ -6,13 +6,13 @@
 /*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 16:01:38 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/07/16 11:27:06 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/07/18 18:37:57 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//in this function i check if there is any pipe into a ' or " and multiple it in -1 andd check for synthax error
+/* //in this function i check if there is any pipe into a ' or " and multiple it in -1 andd check for synthax error
 int    solve_pipe_problem(t_data *data)
 {
     int i;
@@ -33,7 +33,7 @@ int    solve_pipe_problem(t_data *data)
     }
     if (data->s_quote == true || data->d_quote == true)
         return (print_error(data, 's'));
-    return (check_synthax_error(data->cmd))
+    return (check_synthax_error(data->cmd));
 }
    
 int is_error(char c)
@@ -98,5 +98,5 @@ int is_all_space(char *str)
     if (str[i])
         return (1);
     return (0);
-}
+} */
 

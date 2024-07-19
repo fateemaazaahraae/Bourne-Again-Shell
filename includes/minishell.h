@@ -22,7 +22,16 @@
 // #include <curses.h>
 // #include <term.h>
 
-typedef struct s_data
+/* typedef struct s_list
+{
+	char			*content;
+	//char 			**mini_tokens;
+	e_type			*type;
+	struct s_list	*next;
+}			t_list;
+ */
+
+/* typedef struct s_data
 {
     t_list *list;
     char **my_env;
@@ -32,6 +41,6 @@ typedef struct s_data
     bool d_quote;
     bool s_quote;
 } t_data;
-
+ */
 
 #endif

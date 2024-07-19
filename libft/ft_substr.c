@@ -3,27 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/12 16:11:39 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/07/12 17:44:46 by aakouhar         ###   ########.fr       */
+/*   Created: 2023/11/06 14:47:48 by fbazaz            #+#    #+#             */
+/*   Updated: 2023/11/22 14:59:26 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/**
+ * ft_substr - Allocates and returns a substring from the string ’s’.
+ * @s: The string from which to create the substring.
+ * @start: The start index of the substring in the string ’s’.
+ * @len: The maximum length of the substring.
+ * 
+ * Return: The substring or NULL. 
+*/
+
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*new_str;
 	size_t	i;
-	size_t	j;
+	char	*str;
+	int		debut;
 
-	if (!s || !(new_str = (char *)malloc(len + 1)))
-		return (printf("ERROR\n"));
-	i = start;
-	j = 0;
-	while (i < ft_strlen(s) && j < len)
-		new_str[j++] = s[i++];
-	new_str[j] = '\0';
-	return (new_str);
+	i = 0;
+	if (!s)
+		return (NULL);
+	if (start >= ft_strlen(s))
+		return (ft_strdup(""));
+	debut = start;
+	while (s[start++] && i < len)
+		i++;
+	str = (char *)malloc(sizeof(char) * (i + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	start = debut;
+	while (i < len && s[start])
+	{
+		str[i] = s[start];
+		i++;
+		start++;
+	}
+	str[i] = '\0';
+	return (str);
 }
+/* 
+#include <stdio.h>
+int main()
+{
+	char *s = "hello ana tiima";
+	char *str = ft_substr(s, 6, 3);
+	printf("%s\n", str);
+} */
