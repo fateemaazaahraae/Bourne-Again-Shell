@@ -6,7 +6,7 @@
 /*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:28:11 by ali-akouhar       #+#    #+#             */
-/*   Updated: 2024/07/19 09:48:32 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/07/19 11:38:41 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,12 +128,10 @@ int filtre_1(t_data *data)
     i = 0;
     data->d_quote = false;
     data->s_quote = false;
-    if (data->cmd[0] == '|')
-        print_error(data, 's');
-    while (data->cmd[++i])
+    while (data->cmd[i])
     {
         if ((data->cmd[i] == '|' && data->cmd[i + 1] == '\0') || data->cmd[0] == '|')
-            print_error(data, 's'); 
+            return (print_error(data, 's')); 
         if (data->cmd[i] == '"' && !data->s_quote)
             data->d_quote = !data->d_quote;
         else if (data->cmd[i] == '\'' && !data->d_quote)
@@ -145,11 +143,43 @@ int filtre_1(t_data *data)
     return (0);
 }
 
+int is_special(char c)
+{
+    int i;
+    char *check;
+
+    check = " |;&*(){}[]\t";
+    i = -1;
+    while (check[++i])
+        if (check[i] == c)
+            return (1);
+    return (0);
+}
+
+void    solve_between_quote(t_data *data)
+{
+    int i;
+
+    data->d_quote = false;
+    data->s_quote = false;
+    i = -1;
+    while (data->cmd[++i])
+    {
+        if (data->cmd[i] == '"' && !data->s_quote)
+            data->d_quote = !data->d_quote;
+        else if (data->cmd[i] == '\'' && !data->d_quote)
+            data->s_quote = !data->s_quote;
+        if ((data->d_quote || data->s_quote) && is_special(data->cmd[i]))
+            data->cmd[i] *= -1;
+    }
+}
 
 int ft_filtre(t_data *data)
 {
     data->cmd = ft_strtrim(data->cmd, " \t");
     if (filtre_1(data))
         return (data->status);
+    solve_between_quote(data);
+    printf("$$ %s\n", data->cmd);
     return (0);
 }

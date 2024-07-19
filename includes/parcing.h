@@ -26,5 +26,4 @@ int is_all_space(char *str);
 void    check_pipe(char *str, char *check);
 int ft_filtre(t_data *data);
 int filtre_1(t_data *data);
-
 #endif
