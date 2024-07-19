@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parcing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ali-akouhar <ali-akouhar@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:28:11 by ali-akouhar       #+#    #+#             */
-/*   Updated: 2024/07/19 11:38:41 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/07/19 17:16:39 by ali-akouhar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ int is_special(char c)
     int i;
     char *check;
 
-    check = " |;&*(){}[]\t";
+    check = " <|>;&*(){}[]\t";
     i = -1;
     while (check[++i])
         if (check[i] == c)
@@ -174,12 +174,61 @@ void    solve_between_quote(t_data *data)
     }
 }
 
+void solve_redirection_problem(t_data *data, int *i, char **str, int *flag)
+{
+    if (data->cmd[(*i) - 1] != ' ')
+        *str = ft_strjoin_char(*str, ' ');
+    if (data->cmd[(*i) + 1] != ' ')
+        *flag = 1;
+}
+
+void solve_here_doc(t_data *data, int *i, char **str, int *here_doc)
+{
+    if (data->cmd[(*i) - 1] != ' ')
+    {
+        *str = ft_strjoin_char(*str, ' ');
+        (*i)++;
+    }
+    if (data->cmd[(*i) + 1] != ' ')
+        *here_doc = 1;
+    *str = ft_strjoin_char(*str, data->cmd[*i]);
+}
+
+char *new_cmd(t_data *data)
+{
+    int i;
+    char *str;
+    int flag;
+    int here_doc;
+
+    i = -1;
+    str = NULL;
+    while (data->cmd[++i])
+    {
+        flag = 0;
+        here_doc = 0;
+        if (data->cmd[i] == ' ' && data->cmd[i + 1] == ' ')
+            continue;
+        if ((data->cmd[i] == '>' || data->cmd[i] == '<') && data->cmd[i + 1] == data->cmd[i])
+            solve_here_doc(data, &i, &str, &here_doc);
+        else if (data->cmd[i] == '>' || data->cmd[i] == '<')
+            solve_redirection_problem(data, &i, &str, &flag);
+        str = ft_strjoin_char(str, data->cmd[i]);
+        if (flag)
+            str = ft_strjoin_char(str, ' ');
+        if (here_doc)
+            str = ft_strjoin_char(str, ' ');   
+    }
+    printf("^^ %s\n", str);
+    return (str);
+}
 int ft_filtre(t_data *data)
 {
     data->cmd = ft_strtrim(data->cmd, " \t");
     if (filtre_1(data))
         return (data->status);
     solve_between_quote(data);
-    printf("$$ %s\n", data->cmd);
+    data->cmd = new_cmd(data);
+    // printf("$$ %s\n", data->cmd);
     return (0);
 }

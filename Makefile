@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+         #
+#    By: ali-akouhar <ali-akouhar@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 10:06:30 by aakouhar          #+#    #+#              #
-#    Updated: 2024/07/10 10:12:38 by aakouhar         ###   ########.fr        #
+#    Updated: 2024/07/19 16:10:46 by ali-akouhar      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIBFT = libft/libft.a
 SRC = ./src/main.c 
 #EXECUTION_SRC = ./src/execution/builtins/cd.c ./src/execution/builtins/echo.c ./src/execution/builtins/get_env.c ./src/execution/builtins/get_env_utils.c \
 				./src/execution/builtins/pwd.c ./src/execution/builtins/env.c ./src/execution/builtins/unset.c
-PARCING_SRC = ./src/parcing/fill.c ./src/parcing/check.c ./src/parcing/errors.c ./src/parcing/ft_parcing.c 
+PARCING_SRC = ./src/parcing/fill.c ./src/parcing/check.c ./src/parcing/errors.c ./src/parcing/ft_parcing.c ./src/parcing/parcing_utils.c
 
 OBJ = $(SRC:.c=.o) $(EXECUTION_SRC:.c=.o) $(PARCING_SRC:.c=.o)
 

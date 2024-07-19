@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ali-akouhar <ali-akouhar@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:40:49 by tiima             #+#    #+#             */
-/*   Updated: 2024/07/19 11:36:45 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/07/19 16:15:53 by ali-akouhar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int main(int ac, char **av, char **env)
     (void)ac;
     (void)av;
     (void)env;
-    int i;
+    // int i;
 // ls -la>"he was fun"|cat "he was fun" -----> ls    -la  >|   he was fun  |   cat  he was fun
     data = malloc(sizeof(t_data));
     data->list = malloc(sizeof(t_list));
@@ -42,18 +42,18 @@ int main(int ac, char **av, char **env)
         //     data->list = data->list->next;
         ft_fill_tokens(data);
         //     printf("cmd -->%s\n", data->cmd);
-        while (data->list)
-        {
-            printf("content -->%s\n", data->list->content);
-            i = 0;
-            printf("-------------------------\n");
-            while (data->list->mini_tokens[i])
-            {
-                printf("mini ---> %s\n", data->list->mini_tokens[i]);
-                i++;
-            }
-            data->list = data->list->next;
-        }
+        // while (data->list)
+        // {
+        //     printf("content -->%s\n", data->list->content);
+        //     i = 0;
+        //     printf("-------------------------\n");
+        //     while (data->list->mini_tokens[i])
+        //     {
+        //         printf("mini ---> %s\n", data->list->mini_tokens[i]);
+        //         i++;
+        //     }
+        //     data->list = data->list->next;
+        // }
     //     // }
     }
     return (data->status);

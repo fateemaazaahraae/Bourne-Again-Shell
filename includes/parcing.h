@@ -26,4 +26,6 @@ int is_all_space(char *str);
 void    check_pipe(char *str, char *check);
 int ft_filtre(t_data *data);
 int filtre_1(t_data *data);
+void solve_rederction_problem(t_data *data, int *i, char *str);
+char	*ft_strjoin_char(char const *s1, char c);
 #endif
