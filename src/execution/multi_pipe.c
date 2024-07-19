@@ -1,23 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   multi_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/16 12:16:28 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/18 16:58:57 by fbazaz           ###   ########.fr       */
+/*   Created: 2024/07/18 14:18:25 by fbazaz            #+#    #+#             */
+/*   Updated: 2024/07/18 14:19:06 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../includes/minishell.h"
 
-void execute(t_data *data)
-{
-    if (ft_lstsize(data->list) == 1 && is_builtins(data->list->mini_tokens[0]))
-    {
-        execute_builtins(data);
-        return ;
-    }
-    execute_in_child(data);
-}
+void    execute_command(){}

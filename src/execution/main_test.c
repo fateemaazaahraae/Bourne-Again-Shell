@@ -1,5 +1,41 @@
 # include "../../includes/minishell.h"
 
+void    fill_to(t_list **p_tokens)
+{
+    t_list *tmp;
+    int i;
+
+    tmp = *p_tokens;
+    while (tmp)
+    {
+        tmp->mini_tokens = ft_split(tmp->content, ' ');
+        tmp = tmp->next;
+    }
+    tmp = *p_tokens;
+    while (tmp)
+    {
+        for (i = 0; tmp->mini_tokens[i]; i++)
+            printf("1- %s\n", tmp->mini_tokens[i]);
+        tmp = tmp->next;
+    }
+}
+void    ft_fill_tokens(char *cmd, t_list **p_tokens)
+{
+    char **str;
+    t_list  *new;
+
+    str = ft_split(cmd, '|');
+    int i = -1;
+    while (str[++i])
+    {
+        new = ft_lstnew(str[i]);
+        ft_lstadd_back(p_tokens, new);
+        free(str[i]);
+    }
+    free(str);
+    fill_to(p_tokens);
+}
+
 void    execute_non_builtin(t_data *data);
 
 int init_program(t_data **data, char **envp)
@@ -9,7 +45,8 @@ int init_program(t_data **data, char **envp)
         return (printf("Failed to allocate memory for data\n"));
     (*data)->list = malloc(sizeof(t_list));
     if (!(*data)->list)
-        return (free((*data)), printf("Failed to allocate memory for data->list\n"));
+        return (free(*data), printf("Failed to allocate memory for data->list\n"));
+    (*data)->list = NULL;
     (*data)->my_env = get_env(envp);
     return (0);
 }
@@ -26,17 +63,9 @@ int main(int ac, char **av, char **envp)
     {
         data->cmd = readline("minishell$>  ");
         add_history(data->cmd);
-        data->list->mini_tokens = malloc(sizeof(char *) * 2);
-        data->list->mini_tokens[0] = ft_strdup("cd");
-        data->list->mini_tokens[1] = ft_strdup("~");
-        // data->list->mini_tokens[2] = ft_strdup("hello");
-        data->list->mini_tokens[2] = NULL;
+        ft_fill_tokens(data->cmd, &data->list);
         execute(data);
-        // execute_non_builtin(data);
-        // printf("hello\n");
-        // env_to_2D(data->my_env);
-        free(data->list->mini_tokens[0]);
-        free(data->list->mini_tokens[1]);
-        // free(data->list->mini_tokens[2]);
+        return(127);
+        // ft_free_struct(data);
     }
 }

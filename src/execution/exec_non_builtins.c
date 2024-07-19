@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_non_builtin.c                                 :+:      :+:    :+:   */
+/*   exec_non_builtins.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 13:10:58 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/17 17:44:07 by tiima            ###   ########.fr       */
+/*   Updated: 2024/07/18 16:56:21 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char *find_path(t_env *my_env)
     return (NULL);
 }
 
-void    execute_non_builtin(t_data *data)
+void    execute_non_builtins(t_data *data)
 {
     char *all_path;
     char **paths;

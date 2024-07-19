@@ -22,10 +22,10 @@
         (tmp)->mini_tokens = ft_split((tmp)->content, ' ');
         tmp = (tmp)->next;
     }
-}
+} */
 
 //in this function i will fill the return of split into a linked list
-void    ft_fill_tokens(char *cmd, t_list **p_tokens)
+/* void    ft_fill_tokens(char *cmd, t_list **p_tokens)
 {
     char **str;
     t_list  *new;
