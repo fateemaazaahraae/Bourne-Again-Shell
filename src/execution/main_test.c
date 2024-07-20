@@ -1,40 +1,40 @@
 # include "../../includes/minishell.h"
 
-void    fill_to(t_list **p_tokens)
-{
-    t_list *tmp;
-    int i;
+// void    fill_to(t_list **p_tokens)
+// {
+//     t_list *tmp;
+//     int i;
 
-    tmp = *p_tokens;
-    while (tmp)
-    {
-        tmp->mini_tokens = ft_split(tmp->content, ' ');
-        tmp = tmp->next;
-    }
-    tmp = *p_tokens;
-    while (tmp)
-    {
-        for (i = 0; tmp->mini_tokens[i]; i++)
-            printf("1- %s\n", tmp->mini_tokens[i]);
-        tmp = tmp->next;
-    }
-}
-void    ft_fill_tokens(char *cmd, t_list **p_tokens)
-{
-    char **str;
-    t_list  *new;
+//     tmp = *p_tokens;
+//     while (tmp)
+//     {
+//         tmp->mini_tokens = ft_split(tmp->content, ' ');
+//         tmp = tmp->next;
+//     }
+//     tmp = *p_tokens;
+//     while (tmp)
+//     {
+//         for (i = 0; tmp->mini_tokens[i]; i++)
+//             printf("1- %s\n", tmp->mini_tokens[i]);
+//         tmp = tmp->next;
+//     }
+// }
+// void    ft_fill_tokens(char *cmd, t_list **p_tokens)
+// {
+//     char **str;
+//     t_list  *new;
 
-    str = ft_split(cmd, '|');
-    int i = -1;
-    while (str[++i])
-    {
-        new = ft_lstnew(str[i]);
-        ft_lstadd_back(p_tokens, new);
-        free(str[i]);
-    }
-    free(str);
-    fill_to(p_tokens);
-}
+//     str = ft_split(cmd, '|');
+//     int i = -1;
+//     while (str[++i])
+//     {
+//         new = ft_lstnew(str[i]);
+//         ft_lstadd_back(p_tokens, new);
+//         free(str[i]);
+//     }
+//     free(str);
+//     fill_to(p_tokens);
+// }
 
 void    execute_non_builtin(t_data *data);
 
@@ -61,11 +61,17 @@ int main(int ac, char **av, char **envp)
         return (1);
     while (1)
     {
-        data->cmd = readline("minishell$>  ");
+        data->cmd = readline("\x1b[32mminishell $> \x1b[0m");
         add_history(data->cmd);
-        ft_fill_tokens(data->cmd, &data->list);
+        ft_fill_tokens(data);
+        // while (data->list)
+        // {
+        //     for (int i = 0; data->list->mini_tokens[i]; i++)
+        //         printf("^^ %s\n", data->list->mini_tokens[i]);
+        //     data->list = data->list->next;
+        // }
         execute(data);
-        return(127);
-        // ft_free_struct(data);
+        // printf("hello\n");
+        ft_free_struct(&data);
     }
 }

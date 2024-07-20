@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 13:10:58 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/18 16:56:21 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/20 17:11:14 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char *find_path(t_env *my_env)
     return (NULL);
 }
 
-void    execute_non_builtins(t_data *data)
+void    ft_execve(t_data *data)
 {
     char *all_path;
     char **paths;
@@ -59,6 +59,8 @@ void    execute_non_builtins(t_data *data)
         printf("minishell: %s: command not found\n", data->list->mini_tokens[0]);
         exit (127);
     }
+    // for (int i = 0; data->list->mini_tokens[i]; i++)
+    //     printf("--> %s\n", data->list->mini_tokens[i]);
     if (execve(cmd_path, data->list->mini_tokens, env_to_2D(data->my_env)))
         perror("execve");
 }
