@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 13:40:44 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/17 16:04:21 by tiima            ###   ########.fr       */
+/*   Updated: 2024/07/21 19:05:59 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ t_env *ft_lstnew2(char *name, char *value)
     if (!new)
         return NULL;
     new->key = ft_strdup(name);
-    new->value = ft_strdup(value);
+    if (value)
+        new->value = ft_strdup(value);
     new->next = NULL;
     return (new);
 }

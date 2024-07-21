@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parcing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:28:11 by ali-akouhar       #+#    #+#             */
-/*   Updated: 2024/07/16 12:01:21 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/07/20 09:49:13 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void    remove_invalide_quote(t_data *data)
     i = -1;
     while (++i)
     {
-        if (data->cmd[i] == '\"' && data->cmd[i - 1] != ' ')
+        if (data->cmd[i] == '\"' && data->cmd[i - 1] != ' '){}
     }
 }
 

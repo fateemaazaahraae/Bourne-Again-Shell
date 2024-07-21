@@ -106,3 +106,34 @@ void    return_pipe(t_list **p_tokens)
 //     }
 //     return (-1);
 // }
+
+
+static void fill_mini_tokens(t_data *data)
+{
+    t_list *tmp;
+
+    tmp = data->list;
+    while (tmp)
+    {
+        tmp->mini_tokens = ft_split(tmp->content, ' ');
+        tmp = tmp->next;
+    }
+}
+
+void    ft_fill_tokens(t_data *data)
+{
+    char **str;
+    t_list  *new;
+
+    str = ft_split(data->cmd, '|');
+    int i = -1;
+    while (str[++i])
+    {
+        new = ft_lstnew(str[i]);
+        ft_lstadd_back(&data->list, new);
+        free(str[i]);
+    }
+    free(str);
+    // return_pipe(data);
+    fill_mini_tokens(data);
+}

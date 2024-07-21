@@ -64,12 +64,6 @@ int main(int ac, char **av, char **envp)
         data->cmd = readline("\x1b[32mminishell $> \x1b[0m");
         add_history(data->cmd);
         ft_fill_tokens(data);
-        // while (data->list)
-        // {
-        //     for (int i = 0; data->list->mini_tokens[i]; i++)
-        //         printf("^^ %s\n", data->list->mini_tokens[i]);
-        //     data->list = data->list->next;
-        // }
         execute(data);
         // printf("hello\n");
         ft_free_struct(&data);

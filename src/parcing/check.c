@@ -1,20 +1,16 @@
-/* ************************************************************************** */
+/* /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 16:01:38 by aakouhar          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/07/11 19:11:04 by fbazaz           ###   ########.fr       */
-=======
-/*   Updated: 2024/07/16 11:27:06 by aakouhar         ###   ########.fr       */
->>>>>>> 55472fd5c09dad2d17c99d6ff6ae37a8c990b77d
+/*   Updated: 2024/07/20 09:48:27 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+/* # include "../../includes/minishell.h"
 
 //in this function i check if there is any pipe into a ' or " and multiple it in -1 andd check for synthax error
 int    solve_pipe_problem(t_data *data)
@@ -25,8 +21,7 @@ int    solve_pipe_problem(t_data *data)
     data->d_quote = false;
     data->s_quote = false;
     while (data->cmd[++i])
-    { 
-<<<<<<< HEAD
+    {
         if (str[i] == '\"' && !s_quote)
             d_quote = !d_quote;
         else if (str[i] == '\'' && !d_quote)
@@ -35,7 +30,6 @@ int    solve_pipe_problem(t_data *data)
             str[i] *= -1;
         else if (str[i] == '|' && str[i + 1] == '|' && !s_quote && !d_quote)
             return (print_error('s'));
-=======
         if (data->cmd[i] == '\"')
             data->d_quote = !data->d_quote;
         else if (data->cmd[i] == '\'')
@@ -44,7 +38,6 @@ int    solve_pipe_problem(t_data *data)
             data->cmd[i] *= -1;
         else if (data->cmd[i] == '|' && data->cmd[i + 1] == '|' && !data->s_quote && !data->d_quote)
             return (print_error(data, 's'));
->>>>>>> 55472fd5c09dad2d17c99d6ff6ae37a8c990b77d
     }
     if (data->s_quote == true || data->d_quote == true)
         return (print_error(data, 's'));
@@ -113,5 +106,4 @@ int is_all_space(char *str)
     if (str[i])
         return (1);
     return (0);
-}
-
+} */

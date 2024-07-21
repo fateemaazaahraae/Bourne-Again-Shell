@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 13:10:58 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/20 17:11:14 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/21 12:23:49 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void    ft_execve(t_data *data)
     cmd_path = get_cmd_path(data->list->mini_tokens[0], paths);
     if (!cmd_path)
     {
-        printf("minishell: %s: command not found\n", data->list->mini_tokens[0]);
+        printf("minishelllll: %s: command not found\n", data->list->mini_tokens[0]);
         exit (127);
     }
     // for (int i = 0; data->list->mini_tokens[i]; i++)

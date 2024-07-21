@@ -9,7 +9,6 @@ typedef struct s_data
     t_list  *list;
     t_env   *my_env;
     char    *cmd;
-    char    *new_cmd;
     int     status;
     bool    d_quote;
     bool    s_quote;
@@ -38,19 +37,29 @@ void    unset(char **args, t_env *env);
 
 /* --export.c-- */
 void    export(char **args, t_env *env);
+void	print_sorted_env(t_env *head);
 
 /* ----------------------EXECUTION------------------------ */
 /* --execution.c-- */
-int execute(t_data *data);
-int is_builtin(char *command);
+void execute(t_data *data);
 
 /* --exec_builtin.c-- */
-void    execute_builtin(t_data *data);
+int is_builtins(char *command);
+void    execute_builtins(t_data *data);
 
 /* --exec_non_builtin.c-- */
-void    execute_non_builtin(t_data *data);
+void    execute_non_builtins(t_data *data, int index);
 char *find_path(t_env *my_env);
 char *get_cmd_path(char *cmd, char **paths);
+void    dup_fd(t_data *data, int index);
+void    ft_execve(t_data *data);
+void handle_child_process(t_data *data, int fd_in, int pipe_fd[2]);
 
+void    ft_free_struct(t_data **data);
+
+void    ft_fill_tokens(t_data *data);
+
+// must add to libft
+void ft_lstclear2(t_list **lst);
 
 #endif

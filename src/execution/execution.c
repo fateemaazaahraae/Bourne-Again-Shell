@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 12:16:28 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/20 17:21:14 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/21 16:24:45 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,17 +85,32 @@ void execute(t_data *data)
     {
         if (data->list->next)
             open_pipes(pipe_fd);
-        pid = fork_process();
-        if (pid == 0)
-            handle_child_process(data, fd_in, pipe_fd);
+        if (is_builtins(data->list->mini_tokens[0]))
+            execute_builtins(data);
         else
         {
-            if (data->list->next)
-                close(pipe_fd[1]);
-            fd_in = pipe_fd[0];
-            data->list = data->list->next;
-            wait(NULL);
+            pid = fork_process();
+            if (pid == 0)
+                handle_child_process(data, fd_in, pipe_fd);
         }
+        if (data->list->next)
+            close(pipe_fd[1]);
+        fd_in = pipe_fd[0];
+        data->list = data->list->next;
+        wait(NULL);
+        // if (data->list->next)
+        //     open_pipes(pipe_fd);
+        // pid = fork_process();
+        // if (pid == 0)
+        //     handle_child_process(data, fd_in, pipe_fd);
+        // else
+        // {
+        //     if (data->list->next)
+        //         close(pipe_fd[1]);
+        //     fd_in = pipe_fd[0];
+        //     data->list = data->list->next;
+        //     wait(NULL);
+        // }
     }
 }
 
