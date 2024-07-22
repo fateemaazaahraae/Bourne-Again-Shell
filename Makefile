@@ -6,7 +6,7 @@
 #    By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 10:06:30 by aakouhar          #+#    #+#              #
-#    Updated: 2024/07/22 15:02:53 by fbazaz           ###   ########.fr        #
+#    Updated: 2024/07/22 19:03:31 by fbazaz           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC = ./src/main.c
 #EXECUTION_SRC = ./src/execution/builtins/cd.c ./src/execution/builtins/echo.c ./src/execution/builtins/get_env.c ./src/execution/builtins/get_env_utils.c \
 				./src/execution/builtins/pwd.c ./src/execution/builtins/env.c ./src/execution/builtins/unset.c
 PARCING_SRC = ./src/parcing/fill.c ./src/parcing/check.c ./src/parcing/errors.c ./src/parcing/ft_parcing.c ./src/parcing/parcing_utils.c ./src/parcing/files.c \
-				./src/parcing/redir_lst_utils.c
+				./src/parcing/redir_lst_utils.c ./src/parcing/fill_cmd_args.c
 
 OBJ = $(SRC:.c=.o) $(EXECUTION_SRC:.c=.o) $(PARCING_SRC:.c=.o)
 

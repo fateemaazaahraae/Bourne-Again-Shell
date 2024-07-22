@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:49:00 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/07/22 15:07:22 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/22 19:02:52 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,29 +92,99 @@ void    return_pipe(t_list **p_tokens)
 //     return (-1);
 // }
 
-void    fill_cmd_args(t_data *data)
-{
-    int i;
-    int j;
-    t_list *tmp;
+// void    fill_cmd_args(t_data *data)
+// {
+//     int i;
+//     int j;
+//     t_list *tmp;
 
-    tmp = data->list;
-    while (tmp)
-    {
-        i = 0;
-        while (tmp->mini_tokens[i] && tmp->mini_tokens[i][0] != '<' && tmp->mini_tokens[i][0] != '>')
-            i++;
-        tmp->cmd_args = malloc(sizeof(char *) * (i + 1));
-        j = 0;
-        while (tmp->mini_tokens[j] && tmp->mini_tokens[j][0] != '<' && tmp->mini_tokens[j][0] != '>')
-        {
-            tmp->cmd_args[j] = ft_strdup(tmp->mini_tokens[j]);
-            j++;
-        }
-        tmp->cmd_args[j] = NULL;
-        tmp = tmp->next;
-    }
-}
+//     tmp = data->list;
+//     while (tmp)
+//     {
+//         i = 0;
+//         while (tmp->mini_tokens[i] && tmp->mini_tokens[i][0] != '<' && tmp->mini_tokens[i][0] != '>')
+//             i++;
+//         tmp->cmd_args = malloc(sizeof(char *) * (i + 1));
+//         j = 0;
+//         while (tmp->mini_tokens[j] && tmp->mini_tokens[j][0] != '<' && tmp->mini_tokens[j][0] != '>')
+//         {
+//             tmp->cmd_args[j] = ft_strdup(tmp->mini_tokens[j]);
+//             j++;
+//         }
+//         tmp->cmd_args[j] = NULL;
+//         tmp = tmp->next;
+//     }
+// }
+
+// void fill_cmd_args(t_data *data)
+// {
+//     int i;
+//     int j;
+//     int k;
+//     int len;
+//     char **new_cmd_args;
+//     t_list *tmp;
+
+//     tmp = data->list;
+//     while (tmp)
+//     {
+//         i = 0;
+//         while (tmp->mini_tokens[i] && tmp->mini_tokens[i][0] != '<' && tmp->mini_tokens[i][0] != '>')
+//             i++;
+//         tmp->cmd_args = malloc(sizeof(char *) * (i + 1));
+//         j = -1;
+//         while (++j < i)
+//             tmp->cmd_args[j] = ft_strdup(tmp->mini_tokens[j]);
+//         tmp->cmd_args[j] = NULL;
+//         k = i;
+//         len = 0;
+//         while (tmp->mini_tokens[k])
+//         {
+//             if (tmp->mini_tokens[k][0] != '<' && tmp->mini_tokens[k][0] != '>')
+//             {
+//                 k++;
+//                 len++;
+//             }
+//             else
+//                 k += 2;
+//         }
+//         new_cmd_args = malloc(sizeof(char *) * (i + len + 1));
+//         j = -1;
+//         while (++j < i)
+//             new_cmd_args[j] = tmp->cmd_args[j];
+//         free(tmp->cmd_args);
+//         tmp->cmd_args = new_cmd_args;
+//         j = i;
+//         while (tmp->mini_tokens[i])
+//         {
+//             if (tmp->mini_tokens[i][0] == '>')
+//             {
+//                 if (tmp->mini_tokens[i][1] == '>')
+//                     handle_input_output(data, tmp->mini_tokens, &i);
+//                 else
+//                     handle_input_output(data, tmp->mini_tokens, &i);
+//                 i += 2;
+//             }
+//             else if (tmp->mini_tokens[i][0] == '<')
+//             {
+//                 if (tmp->mini_tokens[i][1] == '<')
+//                     handle_here_doc(data);
+//                 else
+//                     handle_input_output(data, tmp->mini_tokens, &i);
+//                 i += 2;
+//             }
+//             else
+//             {
+//                 tmp->cmd_args[j] = ft_strdup(tmp->mini_tokens[i]);
+//                 tmp->cmd_args[j + 1] = NULL;
+//                 j++;
+//                 i++;
+//             }
+//         }
+//         tmp = tmp->next;
+//     }
+// }
+
 
 void fill_mini_tokens(t_data *data)
 {
@@ -148,5 +218,5 @@ void    ft_fill_tokens(t_data *data)
     fill_mini_tokens(data);
     return_special_char(data);
     fill_cmd_args(data);
-    handle_here_doc(data);
+    // handle_here_doc(data);
 }
