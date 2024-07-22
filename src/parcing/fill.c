@@ -1,16 +1,18 @@
- /* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   fill.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:49:00 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/07/13 12:02:27 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/07/22 16:20:43 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../includes/minishell.h"
+// # include "../../includes/parcing.h"
+
 
 /* void split_tokens(t_list **p_tokens)
 {
@@ -22,26 +24,11 @@
         (tmp)->mini_tokens = ft_split((tmp)->content, ' ');
         tmp = (tmp)->next;
     }
-} */
-
-//in this function i will fill the return of split into a linked list
-/* void    ft_fill_tokens(char *cmd, t_list **p_tokens)
-{
-    char **str;
-    t_list  *new;
-
-    str = ft_split(cmd, '|');
-    int i = -1;
-    while (str[++i])
-    {
-        new = ft_lstnew(str[i]);
-        ft_lstadd_back(p_tokens, new);
-        free(str[i]);
-    }
-    free(str);
-    return_pipe(p_tokens);
 }
 
+//in this function i will fill the return of split into a linked list
+
+ */
 void    return_pipe(t_list **p_tokens)
 {
     int i;
@@ -56,7 +43,7 @@ void    return_pipe(t_list **p_tokens)
                 tmp->content[i] *= (-1);       
         tmp = tmp->next;
     }
-} */
+}
 // int ft_fill_tokens(t_list **p_tokens, char *str) // "'hello'"
 // {
 //     int i;
@@ -107,8 +94,31 @@ void    return_pipe(t_list **p_tokens)
 //     return (-1);
 // }
 
+void    fill_cmd_args(t_data *data)
+{
+    int i;
+    int j;
+    t_list *tmp;
 
-static void fill_mini_tokens(t_data *data)
+    tmp = data->list;
+    while (tmp)
+    {
+        i = 0;
+        while (tmp->mini_tokens[i] && tmp->mini_tokens[i][0] != '<' && tmp->mini_tokens[i][0] != '>')
+            i++;
+        tmp->cmd_args = malloc(sizeof(char *) * (i + 1));
+        j = 0;
+        while (tmp->mini_tokens[j] && tmp->mini_tokens[j][0] != '<' && tmp->mini_tokens[j][0] != '>')
+        {
+            tmp->cmd_args[j] = ft_strdup(tmp->mini_tokens[j]);
+            j++;
+        }
+        tmp->cmd_args[j] = NULL;
+        tmp = tmp->next;
+    }
+}
+
+void fill_mini_tokens(t_data *data)
 {
     t_list *tmp;
 
@@ -116,6 +126,8 @@ static void fill_mini_tokens(t_data *data)
     while (tmp)
     {
         tmp->mini_tokens = ft_split(tmp->content, ' ');
+        tmp->out = NULL;
+        tmp->in = NULL;
         tmp = tmp->next;
     }
 }
@@ -136,4 +148,7 @@ void    ft_fill_tokens(t_data *data)
     free(str);
     // return_pipe(data);
     fill_mini_tokens(data);
+    return_special_char(data);
+    fill_cmd_args(data);
+    handle_here_doc(data);
 }

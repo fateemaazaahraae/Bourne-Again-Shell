@@ -1,42 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/02 16:17:08 by fbazaz            #+#    #+#             */
-/*   Updated: 2023/11/22 10:48:00 by fbazaz           ###   ########.fr       */
+/*   Created: 2023/11/07 11:25:19 by fbazaz            #+#    #+#             */
+/*   Updated: 2023/11/21 16:28:14 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+/**
+ * ft_putstr_fd - Outputs the string ’s’ to the given file descriptor.
+ * @s: The string to output.
+ * @fd: The file descriptor on which to write.
+ * 
+ * Return: void.
+ */
+
+void	ft_putstr_fd(char *s, int fd)
 {
-	int		i;
-	int		len;
-	char	*str;
+	int	i;
 
 	i = 0;
-	len = ft_strlen(s);
-	str = (char *)s;
-	while (i <= len)
+	if (!s || fd < 0)
+		return ;
+	while (s[i])
 	{
-		if (str[i] == (char)c)
-			return (&str[i]);
+		ft_putchar_fd(s[i], fd);
 		i++;
 	}
-	return (NULL);
 }
-
-/* #include <stdio.h>
-#include <string.h>
-int main()
-{
-	char	*str;
-	
-	str = ft_strchr("hello tiima", 't');
-	printf("%s\n", str);
-	printf("%s", strchr("hello tiima", 't'));
-} */

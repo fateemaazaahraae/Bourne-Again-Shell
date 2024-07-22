@@ -6,32 +6,70 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:40:49 by tiima             #+#    #+#             */
-/*   Updated: 2024/07/16 14:26:04 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/22 16:23:00 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/minishell.h"
+// # include "../includes/parcing.h"
+
 
 int main(int ac, char **av, char **env)
 {
     t_data *data;
     (void)ac;
     (void)av;
-    // int i;
-// ls -la>"he was fun"|cat "he was fun" -----> ls    -la  >|   he was fun  |   cat  he was fun
-    data = NULL;
+    (void)env;
+    data = malloc(sizeof(t_data));
+    data->list = malloc(sizeof(t_list));
+    if (!data)
+        printf("failed in allocation\n");
     data->my_env = get_env(env);
+    data->list = NULL;
     while (1)
     {
         data->cmd = readline("\x1b[32mminishell $> \x1b[0m");
-        data->status = 0;
         add_history(data->cmd);
-        //ft_parcing(data);
-        //ft_fill_tokens(data->cmd, data);
-        // split_tokens(&p_tokens); //this function is for spliting tokens by space this time not by pipe
+        if (ft_filtre(data))
+            continue;
+        ft_fill_tokens(data);
         // while (data->list)
         // {
-        //     // printf("token --> %s\n", p_tokens->content);
+        //     for (int i = 0; data->list->cmd_args[i]; i++)
+        //         printf("& %s\n", data->list->cmd_args[i]);
+        //     printf("-- %i -- %s -- \n", data->list->here_doc, data->list->limiter);
+        //     if (data->list->in)
+        //     {
+        //         t_redir *in = ft_lstlast_redir(data->list->in);
+        //         printf("*fd  %i\n", in->fd);
+        //         printf("*name  %s\n", in->name);
+        //         printf("*type  %i\n", in->type);
+        //     }
+        //     else
+        //         printf("there is no input file\n");
+        //     if (data->list->out)
+        //     {
+        //         t_redir *out = ft_lstlast_redir(data->list->out);
+        //         printf("*fd  %i\n", out->fd);
+        //         printf("*name  %s\n", out->name);
+        //         printf("*type  %i\n", out->type);
+        //     }
+        //     else
+        //         printf("there is no output file\n");
+        //     printf("--------------------\n\n");
+        //     data->list =  data->list->next;
+        // }
+        // int i;
+        // while (data->list)
+        // {
+        //     printf("content -->%s\n", data->list->content);
+        //     i = 0;
+        //     printf("-------------------------\n");
+        //     while (data->list->mini_tokens[i])
+        //     {
+        //         printf("mini ---> %s\n", data->list->mini_tokens[i]);
+        //         i++;
+        //     }
         //     data->list = data->list->next;
         // }
     }

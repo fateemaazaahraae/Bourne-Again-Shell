@@ -1,6 +1,8 @@
 #ifndef ENV_H
 # define ENV_H
 
+# include "minishell.h"
+
 typedef struct s_env{
     char *key;
     char *value;

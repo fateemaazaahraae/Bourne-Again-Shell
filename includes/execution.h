@@ -2,17 +2,19 @@
 # define EXECUTION_H
 
 # include "minishell.h"
+# include "parcing.h"
 # include "env.h"
 
-typedef struct s_data
-{
-    t_list  *list;
-    t_env   *my_env;
-    char    *cmd;
-    int     status;
-    bool    d_quote;
-    bool    s_quote;
-} t_data;
+// typedef struct s_data
+// {
+//     t_list *list;
+//     t_env   *my_env;
+//     char    *cmd;
+//     char    *new_cmd;
+//     int status;
+//     bool d_quote;
+//     bool s_quote;
+// } t_data;
 
 /* ----------------------BUILTINS------------------------ */
 /* --echo.c-- */
