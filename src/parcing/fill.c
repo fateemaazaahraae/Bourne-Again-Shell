@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:49:00 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/07/22 11:43:37 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/07/22 15:07:22 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ void fill_mini_tokens(t_data *data)
     while (tmp)
     {
         tmp->mini_tokens = ft_split(tmp->content, ' ');
+        tmp->out = NULL;
+        tmp->in = NULL;
         tmp = tmp->next;
     }
 }
@@ -146,4 +148,5 @@ void    ft_fill_tokens(t_data *data)
     fill_mini_tokens(data);
     return_special_char(data);
     fill_cmd_args(data);
+    handle_here_doc(data);
 }

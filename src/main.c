@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:40:49 by tiima             #+#    #+#             */
-/*   Updated: 2024/07/22 11:59:40 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/07/22 15:12:04 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,26 @@ int main(int ac, char **av, char **env)
         {
             for (int i = 0; data->list->cmd_args[i]; i++)
                 printf("& %s\n", data->list->cmd_args[i]);
-            printf("--------------------\n");
+            printf("-- %i -- %s -- \n", data->list->here_doc, data->list->limiter);
+            if (data->list->in)
+            {
+                t_redir *in = ft_lstlast_redir(data->list->in);
+                printf("*fd  %i\n", in->fd);
+                printf("*name  %s\n", in->name);
+                printf("*type  %i\n", in->type);
+            }
+            else
+                printf("there is no input file\n");
+            if (data->list->out)
+            {
+                t_redir *out = ft_lstlast_redir(data->list->out);
+                printf("*fd  %i\n", out->fd);
+                printf("*name  %s\n", out->name);
+                printf("*type  %i\n", out->type);
+            }
+            else
+                printf("there is no output file\n");
+            printf("--------------------\n\n");
             data->list =  data->list->next;
         }
         // int i;
