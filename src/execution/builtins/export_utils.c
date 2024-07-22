@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:35:41 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/21 18:53:21 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/22 08:56:08 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static void	free_env(t_env	*env)
 
 	while (env)
 	{
-		free(env->value);
+		if (env->value)
+			free(env->value);
 		free(env->key);
 		env2 = env->next;
 		free(env);
