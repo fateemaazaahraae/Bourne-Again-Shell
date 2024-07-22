@@ -28,4 +28,7 @@ int ft_filtre(t_data *data);
 int filtre_1(t_data *data);
 void solve_rederction_problem(t_data *data, int *i, char *str);
 char	*ft_strjoin_char(char const *s1, char c);
+void    return_special_char(t_data *data);
+void    fill_cmd_args(t_data *data);
+
 #endif

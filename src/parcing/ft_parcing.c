@@ -3,123 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parcing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ali-akouhar <ali-akouhar@student.42.fr>    +#+  +:+       +#+        */
+/*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:28:11 by ali-akouhar       #+#    #+#             */
-/*   Updated: 2024/07/19 17:16:39 by ali-akouhar      ###   ########.fr       */
+/*   Updated: 2024/07/22 11:43:33 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../../includes/minishell.h"
-
-/* void    reach_second_quote(char *str, int i, char c)
-{
-    while (str[++i])
-    {
-        if (str[i] == c)
-        {
-            str[i] *= -1;
-            break;
-        }
-    }
-}
-
-void    reach_first_quote(char *str, int i, char c)
-{
-    --i;
-    while (i >= 0)
-    {
-        if (str[i] == c)
-        {
-            str[i] *= -1;
-            break;   
-        }
-        i--;
-    }
-}
-
-// void    remove_invalide_quote(t_data *data)
-// {
-//     int i;
-
-//     data->d_quote = false;
-//     data->s_quote = false;
-//     i = -1;
-//     while (data->cmd[++i])
-//     {
-        
-//     }
-//     printf("--> %s\n", data->cmd);
-// }
-void    remove_invalide_quote(t_data *data)
-{
-    int i;
-
-    data->d_quote = false;
-    data->s_quote = false;
-    i = -1;
-    while (data->cmd[++i])
-    {
-        if (data->cmd[i] == '"' && !data->s_quote)
-            data->d_quote = !data->d_quote;
-        else if (data->cmd[i] == '\'' && !data->d_quote)       
-            data->s_quote = !data->s_quote;
-        if (data->cmd[i] == '"')
-        {
-            if (data->cmd[i - 1] != ' ' && data->d_quote && i != 0)
-            {                                                         // ec"h"o "ls"
-                data->cmd[i] *= -1; // "hello"
-                reach_second_quote(data->cmd, i, '"');
-            }
-            else if (data->cmd[i + 1] != ' ' && data->cmd[i + 1] != '\0' && !data->d_quote)
-            {
-                data->cmd[i] *= -1;
-                reach_first_quote(data->cmd , i - 1, '"');
-            }
-        }
-        else if (data->cmd[i] == '\'')
-        {
-            if (data->cmd[i - 1] != ' ' && data->s_quote)
-            {
-                data->cmd[i] *= -1; // "hello"
-                reach_second_quote(data->cmd, i, '\'');
-            }
-            else if (data->cmd[i + 1] != ' ' && data->cmd[i + 1] != '\0' && !data->s_quote)
-            {
-                data->cmd[i] *= -1;
-                reach_first_quote(data->cmd, i - 1, '\'');
-            }
-        }
-    }
-    printf("--> %s\n", data->cmd);
-}
-
-// char *new_str(t_data *data)
-// {
-//     char *new_cmd;
-//     int i;
-
-//     i = -1;
-//     while (data->cmd[++i])
-//     {
-//         if (data->cmd[i] * -1 == '"' || data->cmd[i] * -1 == '\'' )
-//             continue;
-//         if (data->cmd[i] == ' ' && data->cmd[i + 1] == ' ')
-//             continue;
-//         ft_strjoin(new_cmd, (char *)data->cmd[i]);
-//     }
-// }
-
-// int ft_parcing(t_data *data)
-// {
-//     data->cmd = ft_strtrim(data->cmd, " \t");
-//     // solve_pipe_problem(data->cmd);
-//     // if(check_synthax_error(data->cmd) || check_quote(data))
-//     //     return (data->status);
-//     remove_invalid_quote(data);
-//     // data->cmd = new_str(data);
-    
-// } // l"s" */
 
 int filtre_1(t_data *data)
 {
@@ -143,12 +34,19 @@ int filtre_1(t_data *data)
     return (0);
 }
 
-int is_special(char c)
+int is_special(char c, int flag)
 {
     int i;
     char *check;
 
     check = " <|>;&*(){}[]\t";
+    if (flag == 1 && c == '"')
+        return (1);
+    else if (flag == 2 && c == '\'')
+        return (1);
+    else if (flag == 3 && (c == '\'' || c == '"'))
+        return (1);
+        
     i = -1;
     while (check[++i])
         if (check[i] == c)
@@ -159,6 +57,7 @@ int is_special(char c)
 void    solve_between_quote(t_data *data)
 {
     int i;
+    int flag;
 
     data->d_quote = false;
     data->s_quote = false;
@@ -166,60 +65,83 @@ void    solve_between_quote(t_data *data)
     while (data->cmd[++i])
     {
         if (data->cmd[i] == '"' && !data->s_quote)
+        {
             data->d_quote = !data->d_quote;
+            flag = 2;   
+        }
         else if (data->cmd[i] == '\'' && !data->d_quote)
+        {
             data->s_quote = !data->s_quote;
-        if ((data->d_quote || data->s_quote) && is_special(data->cmd[i]))
+            flag = 1;   
+        }
+        if ((data->d_quote || data->s_quote) && is_special(data->cmd[i], flag))
             data->cmd[i] *= -1;
     }
 }
 
-void solve_redirection_problem(t_data *data, int *i, char **str, int *flag)
+void solve_here_doc(t_data *data, int *i, char **str)
 {
-    if (data->cmd[(*i) - 1] != ' ')
-        *str = ft_strjoin_char(*str, ' ');
-    if (data->cmd[(*i) + 1] != ' ')
-        *flag = 1;
-}
-
-void solve_here_doc(t_data *data, int *i, char **str, int *here_doc)
-{
-    if (data->cmd[(*i) - 1] != ' ')
+    if (data->cmd[*i] == '<' || data->cmd[*i] == '>')
     {
-        *str = ft_strjoin_char(*str, ' ');
-        (*i)++;
+        if ((*i) > 0 && data->cmd[(*i) - 1] != ' ')
+            *str = ft_strjoin_char(*str, ' ');
+        *str = ft_strjoin_char(*str, data->cmd[*i]);
+        if (data->cmd[*i + 1] == data->cmd[*i])
+        {
+            (*i)++;
+            *str = ft_strjoin_char(*str, data->cmd[*i]);
+        }
+        if (data->cmd[*i + 1] != ' ' && data->cmd[*i + 1] != '\0')
+            *str = ft_strjoin_char(*str, ' ');
     }
-    if (data->cmd[(*i) + 1] != ' ')
-        *here_doc = 1;
-    *str = ft_strjoin_char(*str, data->cmd[*i]);
+    else
+        *str = ft_strjoin_char(*str, data->cmd[*i]);
+    (*i)++;
+    // if (data->cmd[*i] != '\0')
+    //     solve_here_doc(data, i, str, here_doc);
 }
+void    return_special_char(t_data *data)
+{
+    int i;
+    int j;
 
+    t_list *tmp;
+
+    tmp = data->list;
+    while (tmp) // ls -la |||| cat hello
+    {
+        i = -1;
+        while (tmp->mini_tokens[++i]) // ls -la
+        {
+            j = -1;
+            while(tmp->mini_tokens[i][++j]) // l s - l a
+            {
+                if (is_special(tmp->mini_tokens[i][j] * (-1), 3))
+                    tmp->mini_tokens[i][j] *= -1;
+            }
+        }
+        tmp = tmp->next;   
+    }
+}
 char *new_cmd(t_data *data)
 {
     int i;
     char *str;
-    int flag;
-    int here_doc;
 
     i = -1;
     str = NULL;
     while (data->cmd[++i])
     {
-        flag = 0;
-        here_doc = 0;
         if (data->cmd[i] == ' ' && data->cmd[i + 1] == ' ')
             continue;
-        if ((data->cmd[i] == '>' || data->cmd[i] == '<') && data->cmd[i + 1] == data->cmd[i])
-            solve_here_doc(data, &i, &str, &here_doc);
-        else if (data->cmd[i] == '>' || data->cmd[i] == '<')
-            solve_redirection_problem(data, &i, &str, &flag);
-        str = ft_strjoin_char(str, data->cmd[i]);
-        if (flag)
-            str = ft_strjoin_char(str, ' ');
-        if (here_doc)
-            str = ft_strjoin_char(str, ' ');   
+        if ((data->cmd[i] == '>' || data->cmd[i] == '<'))
+            solve_here_doc(data, &i, &str);
+        if (data->cmd[i] == '\'' || data->cmd[i] == '"')
+            continue;
+        str = ft_strjoin_char(str, data->cmd[i]);  
     }
-    printf("^^ %s\n", str);
+    str = ft_strjoin_char(str, '\0');
+    free(data->cmd);
     return (str);
 }
 int ft_filtre(t_data *data)
@@ -229,6 +151,5 @@ int ft_filtre(t_data *data)
         return (data->status);
     solve_between_quote(data);
     data->cmd = new_cmd(data);
-    // printf("$$ %s\n", data->cmd);
     return (0);
 }

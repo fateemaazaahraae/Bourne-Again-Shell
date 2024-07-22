@@ -6,7 +6,7 @@
 /*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:49:00 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/07/19 10:52:45 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/07/22 11:43:37 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,30 @@ void    return_pipe(t_list **p_tokens)
 //     return (-1);
 // }
 
+void    fill_cmd_args(t_data *data)
+{
+    int i;
+    int j;
+    t_list *tmp;
+
+    tmp = data->list;
+    while (tmp)
+    {
+        i = 0;
+        while (tmp->mini_tokens[i] && tmp->mini_tokens[i][0] != '<' && tmp->mini_tokens[i][0] != '>')
+            i++;
+        tmp->cmd_args = malloc(sizeof(char *) * (i + 1));
+        j = 0;
+        while (tmp->mini_tokens[j] && tmp->mini_tokens[j][0] != '<' && tmp->mini_tokens[j][0] != '>')
+        {
+            tmp->cmd_args[j] = ft_strdup(tmp->mini_tokens[j]);
+            j++;
+        }
+        tmp->cmd_args[j] = NULL;
+        tmp = tmp->next;
+    }
+}
+
 void fill_mini_tokens(t_data *data)
 {
     t_list *tmp;
@@ -120,4 +144,6 @@ void    ft_fill_tokens(t_data *data)
     free(str);
     // return_pipe(data);
     fill_mini_tokens(data);
+    return_special_char(data);
+    fill_cmd_args(data);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ali-akouhar <ali-akouhar@student.42.fr>    +#+  +:+       +#+        */
+/*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:40:49 by tiima             #+#    #+#             */
-/*   Updated: 2024/07/19 16:15:53 by ali-akouhar      ###   ########.fr       */
+/*   Updated: 2024/07/22 11:59:40 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int main(int ac, char **av, char **env)
     (void)ac;
     (void)av;
     (void)env;
-    // int i;
-// ls -la>"he was fun"|cat "he was fun" -----> ls    -la  >|   he was fun  |   cat  he was fun
     data = malloc(sizeof(t_data));
     data->list = malloc(sizeof(t_list));
     if (!data)
@@ -32,16 +30,15 @@ int main(int ac, char **av, char **env)
         add_history(data->cmd);
         if (ft_filtre(data))
             continue;
-        // data->status = 0;
-        // remove_invalide_quote(data);
-        // ft_parcing(data);
-        // split_tokens(&p_tokens); //this function is for spliting tokens by space this time not by pipe
-        // while (data->list)
-        // {
-        //     // printf("token --> %s\n", p_tokens->content);
-        //     data->list = data->list->next;
         ft_fill_tokens(data);
-        //     printf("cmd -->%s\n", data->cmd);
+        while (data->list)
+        {
+            for (int i = 0; data->list->cmd_args[i]; i++)
+                printf("& %s\n", data->list->cmd_args[i]);
+            printf("--------------------\n");
+            data->list =  data->list->next;
+        }
+        // int i;
         // while (data->list)
         // {
         //     printf("content -->%s\n", data->list->content);
@@ -54,7 +51,6 @@ int main(int ac, char **av, char **env)
         //     }
         //     data->list = data->list->next;
         // }
-    //     // }
     }
     return (data->status);
 }

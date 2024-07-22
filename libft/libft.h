@@ -6,7 +6,7 @@
 /*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 09:55:44 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/18 17:04:47 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/07/22 11:28:03 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,27 @@
 # include <unistd.h>
 # include <limits.h>
 
-typedef enum t_type{
-	WRD,
-	FLAG,
-	PIPE,
-	REDE
-}	e_type;
+typedef enum s_type{
+	APPEND,
+	INPUT,
+	OUTPUT,
+} f_type;
+
+typedef struct s_redir{
+	int fd;
+	char *name;
+	f_type type;
+} t_redir;
 
 typedef struct s_list
 {
 	char			*content;
 	char 			**mini_tokens;
-	e_type			*type;
+	char 			**cmd_args;
+	t_redir 		*out;
+	t_redir 		*in;
+	int				here_doc;
+	char			*limiter;
 	struct s_list	*next;
 }			t_list;
 
