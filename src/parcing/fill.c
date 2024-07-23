@@ -6,29 +6,12 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:49:00 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/07/22 19:29:10 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/22 19:30:10 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../includes/minishell.h"
-// # include "../../includes/parcing.h"
 
-
-/* void split_tokens(t_list **p_tokens)
-{
-    t_list *tmp;
-
-    tmp = *p_tokens;
-    while (tmp)
-    {
-        (tmp)->mini_tokens = ft_split((tmp)->content, ' ');
-        tmp = (tmp)->next;
-    }
-}
-
-//in this function i will fill the return of split into a linked list
-
- */
 void    return_pipe(t_list **p_tokens)
 {
     int i;
@@ -44,79 +27,6 @@ void    return_pipe(t_list **p_tokens)
         tmp = tmp->next;
     }
 }
-// int ft_fill_tokens(t_list **p_tokens, char *str) // "'hello'"
-// {
-//     int i;
-//     int start;
-//     int end;
-//     int flag;
-//     t_list *new;
-
-//     i = -1;
-//     end = 0;
-//     while (str[++i])
-//     {
-//         start = end;
-//         if (str[i] == ' ' || str[i] == '\t' || str[i] == '\n') // ls -la 
-//             end = i;
-//         else if (str[i] == '>' || '<')
-//         {
-//             end = i;
-//         }
-//         else if (str[i] == '\"' || str[i] == '\'')
-//         {
-//             start = i;
-//             end = reach_end_of_quote(str, i);
-//         }
-//         start = i;
-//         new = ft_lstnew(ft_substr(str, start, end));
-//         ft_lstadd_back(p_tokens, new);
-//    }
-//    return (0);
-// }
-
-
-// int reach_end_of_quote(char *str, int index)
-// {
-//     int i;
-//     char c;
-    
-//     i = index - 1;
-//     if (str[index] == '\'')
-//         c = '\''; //""'hello'""
-//     else
-//         c = '\"';
-//     while (str[++i])
-//     {
-//         if (str[i] == c)
-//             return (i);
-//     }
-//     return (-1);
-// }
-
-// void    fill_cmd_args(t_data *data)
-// {
-//     int i;
-//     int j;
-//     t_list *tmp;
-
-//     tmp = data->list;
-//     while (tmp)
-//     {
-//         i = 0;
-//         while (tmp->mini_tokens[i] && tmp->mini_tokens[i][0] != '<' && tmp->mini_tokens[i][0] != '>')
-//             i++;
-//         tmp->cmd_args = malloc(sizeof(char *) * (i + 1));
-//         j = 0;
-//         while (tmp->mini_tokens[j] && tmp->mini_tokens[j][0] != '<' && tmp->mini_tokens[j][0] != '>')
-//         {
-//             tmp->cmd_args[j] = ft_strdup(tmp->mini_tokens[j]);
-//             j++;
-//         }
-//         tmp->cmd_args[j] = NULL;
-//         tmp = tmp->next;
-//     }
-// }
 
 void fill_mini_tokens(t_data *data)
 {
@@ -150,5 +60,4 @@ void    ft_fill_tokens(t_data *data)
     fill_mini_tokens(data);
     return_special_char(data);
     fill_cmd_args(data);
-    handle_here_doc(data);
 }
