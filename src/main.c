@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:40:49 by tiima             #+#    #+#             */
-/*   Updated: 2024/07/22 19:31:38 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/24 08:46:02 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,23 @@ int main(int ac, char **av, char **env)
         {
             for (int i = 0; data->list->cmd_args[i]; i++)
                 printf("& %s\n", data->list->cmd_args[i]);
+            // if (data->list->here_doc && data->list->limiter)
             printf("-- %i -- %s -- \n", data->list->here_doc, data->list->limiter);
             if (data->list->in)
             {
                 t_redir *in = ft_lstlast_redir(data->list->in);
-                printf("*fd  %i\n", in->fd);
-                printf("*name  %s\n", in->name);
-                printf("*type  %i\n", in->type);
+                printf("in : *fd  %i\n", in->fd);
+                printf("in : *name  %s\n", in->name);
+                printf("in : *type  %i\n", in->type);
             }
             else
                 printf("there is no input file\n");
             if (data->list->out)
             {
                 t_redir *out = ft_lstlast_redir(data->list->out);
-                printf("*fd  %i\n", out->fd);
-                printf("*name  %s\n", out->name);
-                printf("*type  %i\n", out->type);
+                printf("out : *fd  %i\n", out->fd);
+                printf("out : *name  %s\n", out->name);
+                printf("out : *type  %i\n", out->type);
             }
             else
                 printf("there is no output file\n");
