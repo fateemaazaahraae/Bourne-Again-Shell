@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parcing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:28:11 by ali-akouhar       #+#    #+#             */
-/*   Updated: 2024/07/22 11:43:33 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/07/24 11:52:46 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void solve_here_doc(t_data *data, int *i, char **str)
     // if (data->cmd[*i] != '\0')
     //     solve_here_doc(data, i, str, here_doc);
 }
+
 void    return_special_char(t_data *data)
 {
     int i;
@@ -123,6 +124,7 @@ void    return_special_char(t_data *data)
         tmp = tmp->next;   
     }
 }
+
 char *new_cmd(t_data *data)
 {
     int i;
@@ -130,6 +132,8 @@ char *new_cmd(t_data *data)
 
     i = -1;
     str = NULL;
+    if (!data->cmd)
+        return (NULL);
     while (data->cmd[++i])
     {
         if (data->cmd[i] == ' ' && data->cmd[i + 1] == ' ')
@@ -144,6 +148,7 @@ char *new_cmd(t_data *data)
     free(data->cmd);
     return (str);
 }
+
 int ft_filtre(t_data *data)
 {
     data->cmd = ft_strtrim(data->cmd, " \t");
@@ -151,5 +156,8 @@ int ft_filtre(t_data *data)
         return (data->status);
     solve_between_quote(data);
     data->cmd = new_cmd(data);
+    if (!data->cmd)
+        return (1);
+    ft_fill_tokens(data); 
     return (0);
 }

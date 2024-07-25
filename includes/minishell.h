@@ -14,33 +14,30 @@
 # include <errno.h>
 # include <signal.h>
 # include <termios.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "../libft/libft.h"
 # include "execution.h"
-# include "parcing.h"
+// # include "parcing.h"
 // #include <curses.h>
 // #include <term.h>
 
-/* typedef struct s_list
-{
-	char			*content;
-	//char 			**mini_tokens;
-	e_type			*type;
-	struct s_list	*next;
-}			t_list;
- */
+// typedef struct s_env
+// {
+//     char *key;
+//     char *value;
+//     struct s_env *next;
+// }   t_env;
 
-/* typedef struct s_data
-{
-    t_list *list;
-    char **my_env;
-    char    *cmd;
-    char    *new_cmd;
-    int status;
-    bool d_quote;
-    bool s_quote;
-} t_data;
- */
+// typedef struct s_data
+// {
+//     t_list *list;
+//     t_env   *my_env;
+//     char    *cmd;
+//     char    *new_cmd;
+//     int status;
+//     bool d_quote;
+//     bool s_quote;
+// } t_data;
 
 #endif

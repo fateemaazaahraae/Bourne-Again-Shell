@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 09:55:44 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/22 15:12:42 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/25 12:38:25 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef enum s_type{
 	APPEND,
 	INPUT,
 	OUTPUT,
-} f_type;
+}	f_type;
 
 typedef struct s_redir{
 	int fd;
@@ -31,6 +31,13 @@ typedef struct s_redir{
 	
 } t_redir;
 
+typedef struct s_limiter
+{
+	char *lim;
+	struct s_limiter *next;
+}	t_limiter;
+
+
 typedef struct s_list
 {
 	char			*content;
@@ -38,8 +45,7 @@ typedef struct s_list
 	char 			**cmd_args;
 	t_redir 		*out;
 	t_redir 		*in;
-	int				here_doc;
-	char			*limiter;
+	t_limiter		*limiter;
 	struct s_list	*next;
 }			t_list;
 

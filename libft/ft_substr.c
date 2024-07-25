@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:47:48 by fbazaz            #+#    #+#             */
-/*   Updated: 2023/11/22 14:59:26 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/22 16:04:07 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	str[i] = '\0';
 	return (str);
 }
+
 /* 
 #include <stdio.h>
 int main()

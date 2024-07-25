@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:38:00 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/22 19:20:45 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/25 11:17:13 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void    handle_args_and_redir(t_list *tmp)
     {
         if (tmp->mini_tokens[i][0] == '>' || tmp->mini_tokens[i][0] == '<')
         {
-            handle_here_doc(tmp);
+            handle_here_doc(tmp, i);
             i += 2;  
         }
         else
