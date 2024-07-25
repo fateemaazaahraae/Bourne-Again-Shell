@@ -9,7 +9,6 @@ typedef struct s_data
     t_list *list;
     t_env   *my_env;
     char    *cmd;
-    char    *new_cmd;
     int status;
     bool d_quote;
     bool s_quote;
@@ -39,5 +38,13 @@ void    handle_input_output(t_list *tmp, char **args, int i);
 void ft_lstadd_back_redir(t_redir **redir, t_redir *new);
 t_redir	*ft_lstlast_redir(t_redir *redir);
 t_redir	*ft_lstnew_redir(char *name, int flag);
+void ft_lstclear_redir(t_redir **lst);
+
+void ft_lstclear_limiter(t_limiter **lst);
+t_limiter	*ft_lstnew_limiter(char *name);
+t_limiter	*ft_lstlast_limiter(t_limiter *limiter);
+void ft_lstadd_back_limiter(t_limiter **limiter, t_limiter *new);
+int	ft_lstsize_limiter(t_limiter *lim);
+
 
 #endif

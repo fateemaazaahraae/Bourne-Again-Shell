@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:28:11 by ali-akouhar       #+#    #+#             */
-/*   Updated: 2024/07/22 19:25:16 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/24 11:52:46 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,8 @@ char *new_cmd(t_data *data)
 
     i = -1;
     str = NULL;
+    if (!data->cmd)
+        return (NULL);
     while (data->cmd[++i])
     {
         if (data->cmd[i] == ' ' && data->cmd[i + 1] == ' ')
@@ -154,5 +156,8 @@ int ft_filtre(t_data *data)
         return (data->status);
     solve_between_quote(data);
     data->cmd = new_cmd(data);
+    if (!data->cmd)
+        return (1);
+    ft_fill_tokens(data); 
     return (0);
 }

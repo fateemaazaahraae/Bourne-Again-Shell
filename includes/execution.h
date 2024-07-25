@@ -28,7 +28,7 @@ void    go_to_home(t_env *env);
 void    update_pwd(t_env *env);
 
 /* --pwd.c-- */
-void    pwd(t_env *env);
+void    pwd();
 
 /* --env.c-- */
 void    env(t_env *env);
@@ -47,7 +47,7 @@ void execute(t_data *data);
 
 /* --exec_builtin.c-- */
 int is_builtins(char *command);
-void    execute_builtins(t_data *data);
+void    execute_builtins(t_data *data, t_list *list);
 
 /* --exec_non_builtin.c-- */
 void    execute_non_builtins(t_data *data, int index);
@@ -55,9 +55,11 @@ char *find_path(t_env *my_env);
 char *get_cmd_path(char *cmd, char **paths);
 void    dup_fd(t_data *data, int index);
 void    ft_execve(t_data *data);
-void handle_child_process(t_data *data, int fd_in, int pipe_fd[2]);
-
+void handle_child_process(t_data *data, t_list *list, int fd_in, int pipe_fd[2]);
+void    redirection(t_list *list, int *pipe_fd);
 void    ft_free_struct(t_data **data);
+void free_2D(char **str);
+void here_doc(t_list *list);
 
 void    ft_fill_tokens(t_data *data);
 

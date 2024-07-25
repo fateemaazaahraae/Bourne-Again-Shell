@@ -6,11 +6,28 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 15:00:38 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/22 19:25:04 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/25 08:55:49 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../includes/minishell.h"
+
+void ft_lstclear_redir(t_redir **lst)
+{
+    t_redir *temp;
+
+    if (!lst)
+        return;
+
+    while (*lst)
+    {
+        temp = (*lst)->next;
+        free((*lst)->name);
+        free(*lst);
+        *lst = temp;
+    }
+    *lst = NULL;
+}
 
 t_redir	*ft_lstnew_redir(char *name, int flag)
 {
@@ -46,6 +63,19 @@ t_redir	*ft_lstlast_redir(t_redir *redir)
 	while (redir->next != NULL)
 		redir = redir->next;
 	return (redir);
+}
+
+int	ft_lstsize_limiter(t_limiter *lim)
+{
+	int	counter;
+
+	counter = 0;
+	while (lim != NULL)
+	{
+		counter++;
+		lim = lim->next;
+	}
+	return (counter);
 }
 
 void ft_lstadd_back_redir(t_redir **redir, t_redir *new)

@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:49:00 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/07/24 08:45:58 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/24 17:25:45 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void fill_mini_tokens(t_data *data)
         tmp->out = NULL;
         tmp->in = NULL;
         tmp->limiter = NULL;
-        tmp->here_doc = 0;
         tmp = tmp->next;
     }
 }
@@ -50,6 +49,7 @@ void    ft_fill_tokens(t_data *data)
     t_list  *new;
 
     str = ft_split(data->cmd, '|');
+    data->list = NULL;
     int i = -1;
     while (str[++i])
     {

@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 13:10:58 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/21 12:23:49 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/24 15:47:09 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ char *get_cmd_path(char *cmd, char **paths)
 
     if (!cmd || !paths)
         return (NULL);
+    if (cmd[0] == '.' || cmd[0] == '/')
+	{
+		if (access(cmd, X_OK) == 0)
+			return (cmd);
+		else
+        {
+			printf("minishell : %s: No such file or directory\n", cmd);
+            exit(127);
+        }
+	}
     i = -1;
     while (paths[++i])
     {
@@ -50,18 +60,18 @@ void    ft_execve(t_data *data)
     char *all_path;
     char **paths;
     char *cmd_path;
-
+    
     all_path = find_path(data->my_env);
     paths = ft_split(all_path, ':');
-    cmd_path = get_cmd_path(data->list->mini_tokens[0], paths);
+    cmd_path = get_cmd_path(data->list->cmd_args[0], paths);
     if (!cmd_path)
     {
-        printf("minishelllll: %s: command not found\n", data->list->mini_tokens[0]);
+        printf("minishelllll: %s: command not found\n", data->list->cmd_args[0]);
+        free(all_path);
+        free_2D(paths);
         exit (127);
     }
-    // for (int i = 0; data->list->mini_tokens[i]; i++)
-    //     printf("--> %s\n", data->list->mini_tokens[i]);
-    if (execve(cmd_path, data->list->mini_tokens, env_to_2D(data->my_env)))
+    if (execve(cmd_path, data->list->cmd_args, env_to_2D(data->my_env)))
         perror("execve");
 }
 

@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 12:52:08 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/21 16:19:58 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/24 15:23:21 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@ int is_builtins(char *command)
             !ft_strcmp(command, "exit"));
 }
 
-void    execute_builtins(t_data *data)
+void    execute_builtins(t_data *data, t_list *list)
 {
-    if (ft_strcmp(data->list->mini_tokens[0], "cd") == 0)
-        cd(data->list->mini_tokens, data->my_env);
-    else if (ft_strcmp(data->list->mini_tokens[0], "echo") == 0)
-        echo(data->list->mini_tokens);
-    else if (ft_strcmp(data->list->mini_tokens[0], "pwd") == 0)
-        pwd(data->my_env);
-    else if (ft_strcmp(data->list->mini_tokens[0], "export") == 0)
-        export(data->list->mini_tokens, data->my_env);
-    else if (ft_strcmp(data->list->mini_tokens[0], "unset") == 0)
-        unset(data->list->mini_tokens, data->my_env);
-    else if (ft_strcmp(data->list->mini_tokens[0], "env") == 0)
+    if (ft_strcmp(list->cmd_args[0], "cd") == 0)
+        cd(list->cmd_args, data->my_env);
+    else if (ft_strcmp(list->cmd_args[0], "echo") == 0)
+        echo(list->cmd_args);
+    else if (ft_strcmp(list->cmd_args[0], "pwd") == 0)
+        pwd();
+    else if (ft_strcmp(list->cmd_args[0], "export") == 0)
+        export(list->cmd_args, data->my_env);
+    else if (ft_strcmp(list->cmd_args[0], "unset") == 0)
+        unset(list->cmd_args, data->my_env);
+    else if (ft_strcmp(list->cmd_args[0], "env") == 0)
         env(data->my_env);
-    else if (ft_strcmp(data->list->mini_tokens[0], "exit") == 0)
+    else if (ft_strcmp(list->cmd_args[0], "exit") == 0)
         exit(0);
 }
