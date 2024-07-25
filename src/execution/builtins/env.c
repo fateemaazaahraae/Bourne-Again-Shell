@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:29:38 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/09 14:30:46 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/22 08:53:01 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void    env(t_env *env)
 {
     while (env)
     {
-        printf("%s=%s\n", env->key, env->value);
+        if (env->value)
+            printf("%s=%s\n", env->key, env->value);
         env = env->next;
     }
 }

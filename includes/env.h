@@ -1,0 +1,26 @@
+#ifndef ENV_H
+# define ENV_H
+
+# include "minishell.h"
+
+typedef struct s_env{
+    char *key;
+    char *value;
+    struct s_env *next;
+}   t_env;
+
+
+/* --env_to_2D.c-- */
+char **env_to_2D(t_env *env);
+
+/* --get_env.c-- */
+t_env   *get_env(char **env);
+int	ft_lstsize2(t_env *lst);
+
+/* --get_env_utils.c-- */
+t_env *ft_lstnew2(char *name, char *value);
+t_env    *ft_lstlast2(t_env *lst);
+void ft_lstadd_back2(t_env **lst, t_env *new);
+void	ft_lstdelone2(t_env *lst);
+
+#endif

@@ -3,35 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:40:49 by tiima             #+#    #+#             */
-/*   Updated: 2024/07/15 16:55:31 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/07/24 15:46:22 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/minishell.h"
+// # include "../includes/parcing.h"
+
+int init_program(t_data **data, char **envp)
+{
+    *data = malloc(sizeof(t_data));
+    if (!(*data))
+        return (printf("Failed to allocate memory for data\n"));
+    (*data)->list = malloc(sizeof(t_list));
+    if (!(*data)->list)
+        return (free(*data), printf("Failed to allocate memory for data->list\n"));
+    (*data)->list = NULL;
+    (*data)->my_env = get_env(envp);
+    return (0);
+}
 
 int main(int ac, char **av, char **env)
 {
     t_data *data;
     (void)ac;
     (void)av;
-    // int i;
-// ls -la>"he was fun"|cat "he was fun" -----> ls    -la  >|   he was fun  |   cat  he was fun
-    data->my_env = get_env(env);
+
+    if (init_program(&data, env))
+        return (1);
     while (1)
     {
         data->cmd = readline("\x1b[32mminishell $> \x1b[0m");
-        data->status = 0;
-        ft_parcing(data);
-        ft_fill_tokens(data->cmd, data);
-        // split_tokens(&p_tokens); //this function is for spliting tokens by space this time not by pipe
-        while (data->list)
+        add_history(data->cmd);
+        if (ft_filtre(data))
         {
-            // printf("token --> %s\n", p_tokens->content);
-            data->list = data->list->next;
+            free(data->cmd);
+            continue;
         }
+        execute(data);
+        // printf("ana hna\n");
+        free(data->cmd);
+        ft_free_struct(&data);
     }
     return (data->status);
 }

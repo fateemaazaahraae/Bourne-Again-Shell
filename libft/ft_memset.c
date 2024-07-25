@@ -1,42 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/02 16:17:08 by fbazaz            #+#    #+#             */
-/*   Updated: 2023/11/22 10:48:00 by fbazaz           ###   ########.fr       */
+/*   Created: 2023/11/01 13:10:52 by fbazaz            #+#    #+#             */
+/*   Updated: 2023/11/21 16:11:43 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+void	*ft_memset(void *buffer, int value, size_t num)
 {
-	int		i;
-	int		len;
-	char	*str;
+	size_t	i;
 
 	i = 0;
-	len = ft_strlen(s);
-	str = (char *)s;
-	while (i <= len)
+	while (i < num)
 	{
-		if (str[i] == (char)c)
-			return (&str[i]);
+		((unsigned char *)buffer)[i] = (unsigned char)value;
 		i++;
 	}
-	return (NULL);
+	return (buffer);
 }
-
-/* #include <stdio.h>
-#include <string.h>
-int main()
-{
-	char	*str;
-	
-	str = ft_strchr("hello tiima", 't');
-	printf("%s\n", str);
-	printf("%s", strchr("hello tiima", 't'));
-} */
