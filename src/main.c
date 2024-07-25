@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:40:49 by tiima             #+#    #+#             */
-/*   Updated: 2024/07/24 15:46:22 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/25 16:54:46 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ int init_program(t_data **data, char **envp)
     return (0);
 }
 
+void    ft_handler(int x)
+{
+    if (x == SIGINT)
+    {
+        printf("\n");
+        rl_on_new_line();
+        rl_replace_line("", 1);
+        rl_redisplay();
+    }
+}
 int main(int ac, char **av, char **env)
 {
     t_data *data;
@@ -36,7 +46,13 @@ int main(int ac, char **av, char **env)
         return (1);
     while (1)
     {
+        signal(SIGINT, &ft_handler);
         data->cmd = readline("\x1b[32mminishell $> \x1b[0m");
+        if (!data->cmd)
+        {
+            printf("exit\n");
+            exit(0);
+        }
         add_history(data->cmd);
         if (ft_filtre(data))
         {
