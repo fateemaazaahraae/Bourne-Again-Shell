@@ -62,11 +62,16 @@ char *get_cmd_path(char *cmd, char **paths);
 void    ft_execve(t_data *data);
 
 /* --multi_pipe.c-- */
-void handle_child_process(t_data *data, t_list *list, int fd_in, int pipe_fd[2]);
+void handle_child_process(t_data *data);
+void execute_cmd(t_data *data, t_list *list, int fd_in, int *pipe_fd);
 void here_doc(t_list *list);
 
 /* --execution_tools.c-- */
-void    redirection(t_list *list, int *pipe_fd);
+// void    redirection(t_list *list, int *pipe_fd);
+void red_in_out(t_list *list, int *pipe_fd, int fd_in);
+void save_stdio(int *saved_stdin, int *saved_stdout);
+void restore_stdio(int saved_stdin, int saved_stdout);
+
 
 /* --ft_free.c-- */
 void    ft_free_struct(t_data **data);

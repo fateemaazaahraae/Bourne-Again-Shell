@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:40:49 by tiima             #+#    #+#             */
-/*   Updated: 2024/07/26 08:51:03 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/07/26 10:54:10 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int main(int ac, char **av, char **env)
     {
         signal(SIGINT, &ft_handler);
         data->cmd = readline("\x1b[32mminishell $> \x1b[0m");
-        printf("%s\n", data->cmd);
+        // printf("%s\n", data->cmd);
         if (!data->cmd)
         {
             printf("exit\n");
@@ -62,8 +62,8 @@ int main(int ac, char **av, char **env)
         }
         execute(data);
         // printf("ana hna\n");
-        free(data->cmd);
-        ft_free_struct(&data);
+        // free(data->cmd);
+        // ft_free_struct(&data);
     }
     return (data->status);
 }
