@@ -5,17 +5,6 @@
 # include "parcing.h"
 # include "env.h"
 
-// typedef struct s_data
-// {
-//     t_list *list;
-//     t_env   *my_env;
-//     char    *cmd;
-//     char    *new_cmd;
-//     int status;
-//     bool d_quote;
-//     bool s_quote;
-// } t_data;
-
 /* ----------------------BUILTINS------------------------ */
 /* --echo.c-- */
 int nb_args(char **args);
@@ -41,29 +30,48 @@ void    unset(char **args, t_env *env);
 void    export(char **args, t_env *env);
 void	print_sorted_env(t_env *head);
 
-/* ----------------------EXECUTION------------------------ */
+
+/* ----------------------ENV------------------------ */
+/* --get_env.c-- */
+int	ft_lstsize2(t_env *lst);
+t_env   *get_env(char **env);
+
 /* --execution.c-- */
 void execute(t_data *data);
+pid_t    fork_process();
+void    open_pipes(int *pipe_fd);
 
+/* --get_env_utils.c */
+t_env	*ft_lstnew2(char *name, char *value);
+t_env	*ft_lstlast2(t_env *lst);
+void	ft_lstadd_back2(t_env **lst, t_env *new);
+void	ft_lstdelone2(t_env *lst);
+
+/* --env_to_2D.c-- */
+char **env_to_2D(t_env *env);
+
+
+/* ----------------------EXECUTION------------------------ */
 /* --exec_builtin.c-- */
 int is_builtins(char *command);
 void    execute_builtins(t_data *data, t_list *list);
 
 /* --exec_non_builtin.c-- */
-void    execute_non_builtins(t_data *data, int index);
 char *find_path(t_env *my_env);
 char *get_cmd_path(char *cmd, char **paths);
-void    dup_fd(t_data *data, int index);
 void    ft_execve(t_data *data);
+
+/* --multi_pipe.c-- */
 void handle_child_process(t_data *data, t_list *list, int fd_in, int pipe_fd[2]);
-void    redirection(t_list *list, int *pipe_fd);
-void    ft_free_struct(t_data **data);
-void free_2D(char **str);
 void here_doc(t_list *list);
 
-void    ft_fill_tokens(t_data *data);
+/* --execution_tools.c-- */
+void    redirection(t_list *list, int *pipe_fd);
 
-// must add to libft
-void ft_lstclear2(t_list **lst);
+/* --ft_free.c-- */
+void    ft_free_struct(t_data **data);
+void    free_2D(char **str);
+void    ft_lstclear2(t_list **lst);
+
 
 #endif
