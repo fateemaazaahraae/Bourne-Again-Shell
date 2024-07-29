@@ -6,73 +6,53 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 09:55:06 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/26 17:22:26 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/29 19:25:44 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../includes/minishell.h"
 
-void    ft_dup2(int fd1, int fd2)
-{
-    printf("%i\n%i\n", fd1, fd2);
-    // int i = 
-    // printf("hh %i\n", dup2(fd1, fd2));
-    if (dup2(fd1, fd2) == -1)
-    {
-        perror("dup2");
-        close(fd1);
-        exit(EXIT_FAILURE);
-    }
-    close(fd1);
-}
-
-// void red_in_out(t_list *list, int *saved_stdin, int *saved_stdout)
+// void    ft_dup2(int fd1, int fd2)
 // {
-//     t_redir *in;
-//     t_redir *out;
-
-//     *saved_stdin = dup(STDIN_FILENO);
-//     *saved_stdout = dup(STDOUT_FILENO);
-//     in = ft_lstlast_redir(list->in);
-//     out = ft_lstlast_redir(list->out);
-//     if (in)
+//     if (dup2(fd1, fd2) == -1)
 //     {
-//         printf("hi\n");
-//         ft_dup2(in->fd, STDIN_FILENO);
+//         perror("dup2");
+//         close(fd1);
+//         exit(EXIT_FAILURE);
 //     }
-//     if (out)
-//     {
-//         printf("hi\n");
-//         ft_dup2(out->fd, STDOUT_FILENO);
-//     }
+//     close(fd1);
 // }
+
+void    close_pipe(int *pipe)
+{
+    close(pipe[0]);
+    close(pipe[1]);
+}
 
 void red_in_out(t_list *list, int *pipe_fd, int fd_in)
 {
-    t_redir *in;
     t_redir *out;
 
-    in = ft_lstlast_redir(list->in);
+    out = NULL;
+    (void)fd_in;
     out = ft_lstlast_redir(list->out);
-    if (in)
-    // {
-    //     printf("ana hna\n");
-        ft_dup2(in->fd, STDIN_FILENO);
-    // }
-    else if (pipe_fd[0] && fd_in != STDIN_FILENO)
+    if (list->next)
     {
-        // printf("ana hna\n");
-        ft_dup2(fd_in, STDIN_FILENO);
+        if (out && out->fd > 1)
+        {
+            dup2(out->fd, 1);
+            close(out->fd);
+        }
+        else
+        {
+            dup2(pipe_fd[1], 1);
+            close_pipe(pipe_fd);
+        }
     }
-    if (out)
+    else if (out)
     {
-        // printf("ana hna\n");
-        ft_dup2(out->fd, STDOUT_FILENO);
-    }
-    else if (pipe_fd && pipe_fd[1] != STDOUT_FILENO)
-    {
-        printf("ana hna %i\n", pipe_fd[1]);
-        ft_dup2(pipe_fd[1], STDOUT_FILENO);
+        dup2(out->fd, 1);
+        close(out->fd);
     }
 }
 
@@ -118,8 +98,14 @@ void here_doc(t_list *list)
             write(heredoc_fd[1], "\n", 1);
             free(line);
         }
-        close(heredoc_fd[1]);
-        close(heredoc_fd[0]);
+        if (list->limiter->next)
+        {
+            close(heredoc_fd[0]);
+            close(heredoc_fd[1]);
+        }
         list->limiter = list->limiter->next;
     }
+    close(heredoc_fd[1]);
+    dup2(heredoc_fd[0], STDIN_FILENO);
+    close(heredoc_fd[0]);
 }

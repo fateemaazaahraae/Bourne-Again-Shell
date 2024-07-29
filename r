@@ -1,0 +1,10 @@
+includes
+libft
+Makefile
+mhello
+minishell
+o
+p
+r
+src
+test.c

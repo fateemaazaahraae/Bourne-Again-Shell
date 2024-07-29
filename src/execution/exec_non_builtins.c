@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 13:10:58 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/24 15:47:09 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/29 19:12:19 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void    ft_execve(t_data *data)
         free_2D(paths);
         exit (127);
     }
+        // ft_putendl_fd("----> ", 2);
+    
     if (execve(cmd_path, data->list->cmd_args, env_to_2D(data->my_env)))
         perror("execve");
 }

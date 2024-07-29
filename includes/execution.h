@@ -63,7 +63,7 @@ void    ft_execve(t_data *data);
 
 /* --multi_pipe.c-- */
 void handle_child_process(t_data *data);
-void execute_cmd(t_data *data, t_list *list, int fd_in, int *pipe_fd);
+void execute_cmd(t_data *data, t_list *list, int *fd_in);
 void here_doc(t_list *list);
 
 /* --execution_tools.c-- */
@@ -77,6 +77,8 @@ void restore_stdio(int saved_stdin, int saved_stdout);
 void    ft_free_struct(t_data **data);
 void    free_2D(char **str);
 void    ft_lstclear2(t_list **lst);
+
+void    close_pipe(int *pipe);
 
 
 #endif
