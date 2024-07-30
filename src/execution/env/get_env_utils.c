@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 13:40:44 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/24 10:08:37 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/30 20:12:39 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,18 @@ void	ft_lstdelone2(t_env *lst)
 	free(lst->key);
 	free(lst->value);
 	free(lst);
+}
+
+char	*find_key_env(char *key)
+{
+	t_env	*tmp;
+
+	tmp = global_data->my_env;
+	while (tmp)
+	{
+		if (!ft_strcmp(tmp->key, key))
+			return (tmp->value);
+		tmp = tmp->next;
+	}
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:28:11 by ali-akouhar       #+#    #+#             */
-/*   Updated: 2024/07/30 17:59:13 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/30 18:24:42 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,17 +149,15 @@ char *new_cmd()
     return (str);
 }
 
-t_list *ft_filtre(t_list **list)
+t_list *ft_filtre()
 {
-    *list = NULL;
     global_data->cmd = ft_strtrim(global_data->cmd, " \t");
     if (filtre_1())
-        return (global_data->exit_status);
+        return (NULL);
     solve_between_quote();
     global_data->cmd = new_cmd();
     if (!global_data->cmd)
         return (NULL);
-    printf("--> cmd : %s\n", global_data->cmd);
-    ft_fill_tokens(list);
-    return (0);
+    // printf("--> cmd : %s\n", global_data->cmd);
+    return (ft_fill_tokens());
 }

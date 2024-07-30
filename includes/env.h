@@ -22,5 +22,7 @@ t_env *ft_lstnew2(char *name, char *value);
 t_env    *ft_lstlast2(t_env *lst);
 void ft_lstadd_back2(t_env **lst, t_env *new);
 void	ft_lstdelone2(t_env *lst);
+char	*find_key_env(char *key);
+
 
 #endif

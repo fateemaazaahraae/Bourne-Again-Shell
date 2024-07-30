@@ -6,7 +6,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/libft.h"
-// # include "execution.h"
+# include "execution.h"
 # include "parcing.h"
 # include "env.h"
 
@@ -14,6 +14,7 @@ typedef struct s_global
 {
     t_env   *my_env;
     char    *cmd;
+    char    *pwd;
     int     exit_status;
     bool    d_quote;
     bool    s_quote;

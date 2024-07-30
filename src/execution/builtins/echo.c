@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:37:08 by tiima             #+#    #+#             */
-/*   Updated: 2024/07/30 11:16:31 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/30 19:11:58 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,17 @@ int echo(t_list *list)
     }
     while (list->cmd_args[i])
     {
-        // printf("%s", args[i]);
-        ft_putstr_fd(list->cmd_args[i], list->outfile);
+        printf("%s", list->cmd_args[i]);
+        // ft_putstr_fd(list->cmd_args[i], list->outfile);
+        // printf("$$ %i\n", list->outfile);
         if (list->cmd_args[i + 1])
-            ft_putstr_fd(" ", list->outfile);
+            printf(" ");
+            // ft_putstr_fd(" ", list->outfile);
         i++;
     }
     if (!n_flag)
-        ft_putstr_fd("\n", list->outfile);
+        printf("\n");
+        // ft_putstr_fd("\n", list->outfile);
     return 0;
 }
 

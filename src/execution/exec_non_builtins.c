@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 13:10:58 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/30 13:17:09 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/30 19:27:47 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,29 +55,24 @@ char *find_path(t_env *my_env)
     return (NULL);
 }
 
-void    ft_execve(t_data *data)
+void    ft_execve(t_list *list)
 {
     char *all_path;
     char **paths;
     char *cmd_path;
-    
-    // print_cmd_list(data->list);
-    all_path = find_path(data->my_env);
+
+    all_path = find_path(global_data->my_env);
     paths = ft_split(all_path, ':');
-    cmd_path = get_cmd_path(data->list->cmd_args[0], paths);
+    cmd_path = get_cmd_path(list->cmd_args[0], paths);
     if (!cmd_path)
     {
-        printf("minishelllll: %s: command not found\n", data->list->cmd_args[0]);
+        printf("minishelllll: %s: command not found\n", list->cmd_args[0]);
         free(all_path);
         free_2D(paths);
         exit (127);
     }
-    ft_putstr_fd("hna: ", 2);
-    ft_putnbr_fd(data->list->outfile, 2);
-    ft_putstr_fd(data->list->cmd_args[0], 2);
-    write(2, "\n", 1);
     printf("allaho akbar\n");
-    execve(cmd_path, data->list->cmd_args, env_to_2D(data->my_env));
+    execve(cmd_path, list->cmd_args, env_to_2D(global_data->my_env));
     exit_func(EXECVE, NULL);
 }
 

@@ -12,7 +12,7 @@
 
 /* -------------------------------PARCING--------------------------------*/
 void split_tokens(t_list **p_tokens);
-void    ft_fill_tokens(t_list **list);
+t_list    *ft_fill_tokens();
 void fill_mini_tokens(t_list *list);
 
 int print_error(char c);
@@ -23,7 +23,7 @@ void    solve_between_quote();
 int check_synthax_error(char *str);
 int is_all_space(char *str);
 void    check_pipe(char *str, char *check);
-int ft_filtre(t_list **list);
+t_list *ft_filtre();
 int filtre_1();
 char *new_cmd();
 // void solve_rederction_problem(t_data *data, int *i, char *str);
@@ -48,6 +48,6 @@ int	ft_lstsize_limiter(t_limiter *lim);
 void check_files(t_list *list);
 int check_out(t_list *tmp);
 int check_in(t_list *tmp);
-int init_program(t_list **list, char **av, int ac, char **envp);
+int init_program(char **av, int ac, char **envp);
 
 #endif

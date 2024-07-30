@@ -6,52 +6,41 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 12:16:28 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/30 13:33:22 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/30 19:27:40 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../includes/minishell.h"
 
-void print_cmd_list(t_list *list)
-{
-    t_list *tmp = list;
-
-    while (tmp)
-    {
-        ft_putendl_fd(tmp->cmd_args[0], 2);
-        tmp = tmp->next;
-    }
-}
-void    run_execution(t_list *list, t_data *data)
+void    run_execution(t_list *list)
 {
     t_list *tmp;
 
     tmp = list;
     while (tmp)
     {
-        if (execute_cmd(tmp, data))
+        if (execute_cmd(tmp))
             break;
         if (tmp->outfile != 1)
 			close(tmp->outfile);
-        // sleep(2);
         tmp = tmp->next;
     }
     while (wait(NULL) > 0);
 }
 
-void    execution(t_data *data)
+void    execution(t_list *list)
 {
     int stdin;
     int stdout;
 
     save_stdio(&stdin, &stdout);
-    if (ft_lstsize(data->list) == 1 && is_builtins(data->list->cmd_args[0]))
+    if (ft_lstsize(list) == 1 && is_builtins(list->cmd_args[0]))
     {
-        execute_builtins(data, data->list);
+        execute_builtins(list);
         restore_stdio(stdin, stdout);
         return ;
     }
-    run_execution(data->list, data);
+    run_execution(list);
     restore_stdio(stdin, stdout);
 }
 

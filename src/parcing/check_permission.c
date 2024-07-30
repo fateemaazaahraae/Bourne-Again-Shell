@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 09:00:31 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/30 10:23:16 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/30 19:57:23 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int check_in(t_list *tmp)
         if (access(tmp->in->name, F_OK) == -1)
         {
             printf("minishell: %s: No such file or directory\n", tmp->in->name);
+            tmp->infile = -1;
             return (-1);
         }
         if (access(tmp->in->name, R_OK) == -1)

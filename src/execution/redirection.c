@@ -6,22 +6,11 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 09:55:06 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/30 13:20:20 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/30 19:27:26 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../includes/minishell.h"
-
-// void    ft_dup2(int fd1, int fd2)
-// {
-//     if (dup2(fd1, fd2) == -1)
-//     {
-//         perror("dup2");
-//         close(fd1);
-//         exit(EXIT_FAILURE);
-//     }
-//     close(fd1);
-// }
 
 void    close_pipe(t_list *list)
 {
@@ -35,24 +24,24 @@ void dup_out_pipe(t_list *list)
     {
         if (list->outfile > 1)
         {
-            ft_putendl_fd("!3ndi outfile", STDERR_FILENO);
-            // ft_putnbr_fd(list->outfile, STDERR_FILENO);
             dup2(list->outfile, STDOUT_FILENO);
-            printf("i'm here\n");
             close(list->outfile);
         }
         else
         {
-            ft_putendl_fd("!ankteb f pipe", STDERR_FILENO);
             dup2(list->pipe_fd[1], STDOUT_FILENO);
             close_pipe(list);
         }
     }
     else if (list->outfile > 1)
     {
-        ft_putendl_fd("3ndi outfile", STDERR_FILENO);
         dup2(list->outfile, STDOUT_FILENO);
         close(list->outfile);
+    }
+    if (is_builtins(list->cmd_args[0]))
+    {
+        execute_builtins(list);
+        exit(0);
     }
 }
 
