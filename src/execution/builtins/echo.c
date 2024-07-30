@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 17:37:08 by tiima             #+#    #+#             */
-/*   Updated: 2024/07/18 13:25:52 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/30 11:16:31 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,27 +35,28 @@ int is_n_flag(char *arg)
     return (1);
 }
 
-int echo(char **args)
+int echo(t_list *list)
 {
     int i;
     int n_flag;
     
     i = 1;
     n_flag = 0;
-    while (args[i] && is_n_flag(args[i]))
+    while (list->cmd_args[i] && is_n_flag(list->cmd_args[i]))
     {
         n_flag = 1;
         i++;
     }
-    while (args[i])
+    while (list->cmd_args[i])
     {
-        printf("%s", args[i]);
-        if (args[i + 1])
-            printf(" ");
+        // printf("%s", args[i]);
+        ft_putstr_fd(list->cmd_args[i], list->outfile);
+        if (list->cmd_args[i + 1])
+            ft_putstr_fd(" ", list->outfile);
         i++;
     }
     if (!n_flag)
-        printf("\n");
+        ft_putstr_fd("\n", list->outfile);
     return 0;
 }
 

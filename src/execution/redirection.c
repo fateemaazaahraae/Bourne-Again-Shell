@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 09:55:06 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/29 19:25:44 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/30 13:20:20 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,36 +23,36 @@
 //     close(fd1);
 // }
 
-void    close_pipe(int *pipe)
+void    close_pipe(t_list *list)
 {
-    close(pipe[0]);
-    close(pipe[1]);
+    close(list->pipe_fd[0]);
+    close(list->pipe_fd[1]);
 }
 
-void red_in_out(t_list *list, int *pipe_fd, int fd_in)
+void dup_out_pipe(t_list *list)
 {
-    t_redir *out;
-
-    out = NULL;
-    (void)fd_in;
-    out = ft_lstlast_redir(list->out);
     if (list->next)
     {
-        if (out && out->fd > 1)
+        if (list->outfile > 1)
         {
-            dup2(out->fd, 1);
-            close(out->fd);
+            ft_putendl_fd("!3ndi outfile", STDERR_FILENO);
+            // ft_putnbr_fd(list->outfile, STDERR_FILENO);
+            dup2(list->outfile, STDOUT_FILENO);
+            printf("i'm here\n");
+            close(list->outfile);
         }
         else
         {
-            dup2(pipe_fd[1], 1);
-            close_pipe(pipe_fd);
+            ft_putendl_fd("!ankteb f pipe", STDERR_FILENO);
+            dup2(list->pipe_fd[1], STDOUT_FILENO);
+            close_pipe(list);
         }
     }
-    else if (out)
+    else if (list->outfile > 1)
     {
-        dup2(out->fd, 1);
-        close(out->fd);
+        ft_putendl_fd("3ndi outfile", STDERR_FILENO);
+        dup2(list->outfile, STDOUT_FILENO);
+        close(list->outfile);
     }
 }
 

@@ -6,53 +6,40 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 14:18:25 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/29 19:24:52 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/30 13:33:41 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../includes/minishell.h"
 
-void handle_child_process(t_data *data)
+int    execute_cmd(t_list *list, t_data *data)
 {
-    ft_execve(data);
-    exit(EXIT_SUCCESS);
-}
-
-void execute_cmd(t_data *data, t_list *list, int *fd_in)
-{
-    pid_t   pid;
-    int     pipe_fd[2];
-    t_redir *in;
-
-    in = NULL;
-    in = ft_lstlast_redir(list->in);
-    if (in && in->fd > 0)
+    if (list->next)
+        if (pipe(list->pipe_fd) == -1)
+            return (exit_func(PIPE_ERR, NULL), 1);
+    if (list->infile > 0)
     {
-        dup2(in->fd, 0);
-        close(in->fd);
+        ft_putendl_fd("3ndi infile", STDERR_FILENO);
+        dup2(list->infile, STDIN_FILENO);
+        close(list->infile);
     }
-    if (data->list->next)
-        open_pipes(pipe_fd);
-    if (is_builtins(list->cmd_args[0]))
+    list->pid = fork_process();
+    if (!list->pid)
     {
-        red_in_out(list, pipe_fd, *fd_in);
-        execute_builtins(data, list);
-    }
-    else
-    {
-        pid = fork_process();
-        if (pid == 0)
+        if (list->infile == -1 || list->outfile == -1)
         {
-            // write(2, "----------------------------\n", 29);
-            red_in_out(list, pipe_fd, *fd_in);
-            handle_child_process(data);
-            close(pipe_fd[0]);
-            close(pipe_fd[1]);
+            printf("hna\n");
+            exit(1);
         }
+        dup_out_pipe(list);
+    write(2, "-----", 5);
+    ft_putendl_fd(list->cmd_args[0], 2);
+        if (is_builtins(list->cmd_args[0]))
+            execute_builtins(data, list);
         else
-        {
-            close_pipe(pipe_fd);
-        }
+            ft_execve(data);
     }
-	dup2(pipe_fd[0], 0);
+    dup2(list->pipe_fd[0], STDIN_FILENO);
+    close_pipe(list);
+    return (0);
 }

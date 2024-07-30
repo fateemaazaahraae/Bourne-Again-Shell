@@ -6,35 +6,22 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:49:00 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/07/25 12:37:44 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/30 17:25:57 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../includes/minishell.h"
 
-void    return_pipe(t_list **p_tokens)
-{
-    int i;
-    t_list  *tmp;
-
-    tmp = *p_tokens;
-    while (tmp)
-    {
-        i = -1;
-        while (tmp->content[++i])
-            if ((tmp->content[i] * (-1)) == '|')
-                tmp->content[i] *= (-1);       
-        tmp = tmp->next;
-    }
-}
-
-void fill_mini_tokens(t_data *data)
+void fill_mini_tokens(t_list *list)
 {
     t_list *tmp;
 
-    tmp = data->list;
+    tmp = list;
+    // printf("size ** %d\n", ft_lstsize(tmp));
     while (tmp)
     {
+    // printf("////%d // %s\n", tmp->i, tmp->content);
+    // list->i = 6;
         tmp->mini_tokens = ft_split(tmp->content, ' ');
         tmp->out = NULL;
         tmp->in = NULL;
@@ -43,23 +30,33 @@ void fill_mini_tokens(t_data *data)
     }
 }
 
-void    ft_fill_tokens(t_data *data)
+void    ft_fill_tokens(t_list **list)
 {
     char **str;
     t_list  *new;
 
-    str = ft_split(data->cmd, '|');
-    data->list = NULL;
+    str = ft_split(global_data->cmd, '|');
     int i = -1;
     while (str[++i])
     {
         new = ft_lstnew(str[i]);
-        ft_lstadd_back(&data->list, new);
+        if (!new)
+            printf("Failed to create the node\n");
+        ft_lstadd_back(list, new);
+        (*list)->i = 9;
         free(str[i]);
     }
     free(str);
-    // return_pipe(data);
-    fill_mini_tokens(data);
-    return_special_char(data);
-    fill_cmd_args(data);
+    fill_mini_tokens(*list);
+    return_special_char(*list);
+    fill_cmd_args(*list);
+    while (*list)
+    {
+        for(int i = 0; (*list)->mini_tokens[i]; i++)
+            printf("** %s\n", (*list)->mini_tokens[i]);
+        for(int h = 0; (*list)->cmd_args[h]; h++)
+            printf("^^^ %s\n", (*list)->cmd_args[h]);
+        (*list) = (*list)->next;
+    }
+    check_files(*list);
 }

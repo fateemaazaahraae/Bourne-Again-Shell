@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 13:10:58 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/29 19:12:19 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/30 13:17:09 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void    ft_execve(t_data *data)
     char **paths;
     char *cmd_path;
     
+    // print_cmd_list(data->list);
     all_path = find_path(data->my_env);
     paths = ft_split(all_path, ':');
     cmd_path = get_cmd_path(data->list->cmd_args[0], paths);
@@ -71,9 +72,12 @@ void    ft_execve(t_data *data)
         free_2D(paths);
         exit (127);
     }
-        // ft_putendl_fd("----> ", 2);
-    
-    if (execve(cmd_path, data->list->cmd_args, env_to_2D(data->my_env)))
-        perror("execve");
+    ft_putstr_fd("hna: ", 2);
+    ft_putnbr_fd(data->list->outfile, 2);
+    ft_putstr_fd(data->list->cmd_args[0], 2);
+    write(2, "\n", 1);
+    printf("allaho akbar\n");
+    execve(cmd_path, data->list->cmd_args, env_to_2D(data->my_env));
+    exit_func(EXECVE, NULL);
 }
 

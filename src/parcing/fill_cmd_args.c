@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:38:00 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/25 11:17:13 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/30 16:29:54 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ static void    handle_args_and_redir(t_list *tmp)
     tmp->cmd_args[j] = NULL;
 }
 
-void    fill_cmd_args(t_data *data)
+void    fill_cmd_args(t_list *list)
 {
     int     count;
     t_list  *tmp;
 
-    tmp = data->list;
+    tmp = list;
     while (tmp)
     {
         count = count_args(tmp->mini_tokens);
@@ -70,6 +70,8 @@ void    fill_cmd_args(t_data *data)
             printf("Error while allocating tmp->cmd_args\n");
             return ;
         }
+        tmp->infile = 0;
+        tmp->outfile = 1;
         handle_args_and_redir(tmp);
         tmp = tmp->next;
     }

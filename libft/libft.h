@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 09:55:44 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/25 12:38:25 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/30 16:22:23 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,16 @@ typedef struct s_limiter
 
 typedef struct s_list
 {
+	int i;
 	char			*content;
 	char 			**mini_tokens;
 	char 			**cmd_args;
 	t_redir 		*out;
 	t_redir 		*in;
+	int				outfile;
+	int				infile;
+	int				pipe_fd[2];
+	pid_t			pid;
 	t_limiter		*limiter;
 	struct s_list	*next;
 }			t_list;

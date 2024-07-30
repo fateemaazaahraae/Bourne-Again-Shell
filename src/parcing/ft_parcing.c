@@ -6,31 +6,31 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:28:11 by ali-akouhar       #+#    #+#             */
-/*   Updated: 2024/07/24 11:52:46 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/30 17:59:13 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../../includes/minishell.h"
 
-int filtre_1(t_data *data)
+int filtre_1()
 {
     int     i;
 
     i = 0;
-    data->d_quote = false;
-    data->s_quote = false;
-    while (data->cmd[i])
+    global_data->d_quote = false;
+    global_data->s_quote = false;
+    while (global_data->cmd[i])
     {
-        if ((data->cmd[i] == '|' && data->cmd[i + 1] == '\0') || data->cmd[0] == '|')
-            return (print_error(data, 's')); 
-        if (data->cmd[i] == '"' && !data->s_quote)
-            data->d_quote = !data->d_quote;
-        else if (data->cmd[i] == '\'' && !data->d_quote)
-            data->s_quote = !data->s_quote;
+        if ((global_data->cmd[i] == '|' && global_data->cmd[i + 1] == '\0') || global_data->cmd[0] == '|')
+            return (print_error('s')); 
+        if (global_data->cmd[i] == '"' && !global_data->s_quote)
+            global_data->d_quote = !global_data->d_quote;
+        else if (global_data->cmd[i] == '\'' && !global_data->d_quote)
+            global_data->s_quote = !global_data->s_quote;
         i++;
     }
-    if (data->s_quote == true || data->d_quote == true)
-        return (print_error(data, 's'));
+    if (global_data->s_quote == true || global_data->d_quote == true)
+        return (print_error('s'));
     return (0);
 }
 
@@ -54,64 +54,64 @@ int is_special(char c, int flag)
     return (0);
 }
 
-void    solve_between_quote(t_data *data)
+void    solve_between_quote()
 {
     int i;
     int flag;
 
-    data->d_quote = false;
-    data->s_quote = false;
+    global_data->d_quote = false;
+    global_data->s_quote = false;
     i = -1;
-    while (data->cmd[++i])
+    while (global_data->cmd[++i])
     {
-        if (data->cmd[i] == '"' && !data->s_quote)
+        if (global_data->cmd[i] == '"' && !global_data->s_quote)
         {
-            data->d_quote = !data->d_quote;
+            global_data->d_quote = !global_data->d_quote;
             flag = 2;   
         }
-        else if (data->cmd[i] == '\'' && !data->d_quote)
+        else if (global_data->cmd[i] == '\'' && !global_data->d_quote)
         {
-            data->s_quote = !data->s_quote;
+            global_data->s_quote = !global_data->s_quote;
             flag = 1;   
         }
-        if ((data->d_quote || data->s_quote) && is_special(data->cmd[i], flag))
-            data->cmd[i] *= -1;
+        if ((global_data->d_quote || global_data->s_quote) && is_special(global_data->cmd[i], flag))
+            global_data->cmd[i] *= -1;
     }
 }
 
-void solve_here_doc(t_data *data, int *i, char **str)
+void solve_here_doc(int *i, char **str)
 {
-    if (data->cmd[*i] == '<' || data->cmd[*i] == '>')
+    if (global_data->cmd[*i] == '<' || global_data->cmd[*i] == '>')
     {
-        if ((*i) > 0 && data->cmd[(*i) - 1] != ' ')
+        if ((*i) > 0 && global_data->cmd[(*i) - 1] != ' ')
             *str = ft_strjoin_char(*str, ' ');
-        *str = ft_strjoin_char(*str, data->cmd[*i]);
-        if (data->cmd[*i + 1] == data->cmd[*i])
+        *str = ft_strjoin_char(*str, global_data->cmd[*i]);
+        if (global_data->cmd[*i + 1] == global_data->cmd[*i])
         {
             (*i)++;
-            *str = ft_strjoin_char(*str, data->cmd[*i]);
+            *str = ft_strjoin_char(*str, global_data->cmd[*i]);
         }
-        if (data->cmd[*i + 1] != ' ' && data->cmd[*i + 1] != '\0')
+        if (global_data->cmd[*i + 1] != ' ' && global_data->cmd[*i + 1] != '\0')
             *str = ft_strjoin_char(*str, ' ');
     }
     else
-        *str = ft_strjoin_char(*str, data->cmd[*i]);
+        *str = ft_strjoin_char(*str, global_data->cmd[*i]);
     (*i)++;
     // if (data->cmd[*i] != '\0')
     //     solve_here_doc(data, i, str, here_doc);
 }
 
-void    return_special_char(t_data *data)
+void    return_special_char(t_list *list)
 {
     int i;
     int j;
 
     t_list *tmp;
-
-    tmp = data->list;
+    tmp = list;
     while (tmp) // ls -la |||| cat hello
     {
         i = -1;
+    // printf("iiiiiii%d\n", list->i);
         while (tmp->mini_tokens[++i]) // ls -la
         {
             j = -1;
@@ -125,39 +125,41 @@ void    return_special_char(t_data *data)
     }
 }
 
-char *new_cmd(t_data *data)
+char *new_cmd()
 {
     int i;
     char *str;
 
     i = -1;
     str = NULL;
-    if (!data->cmd)
+    if (!global_data->cmd)
         return (NULL);
-    while (data->cmd[++i])
+    while (global_data->cmd[++i])
     {
-        if (data->cmd[i] == ' ' && data->cmd[i + 1] == ' ')
+        if (global_data->cmd[i] == ' ' && global_data->cmd[i + 1] == ' ')
             continue;
-        if ((data->cmd[i] == '>' || data->cmd[i] == '<'))
-            solve_here_doc(data, &i, &str);
-        if (data->cmd[i] == '\'' || data->cmd[i] == '"')
+        if ((global_data->cmd[i] == '>' || global_data->cmd[i] == '<'))
+            solve_here_doc(&i, &str);
+        if (global_data->cmd[i] == '\'' || global_data->cmd[i] == '"')
             continue;
-        str = ft_strjoin_char(str, data->cmd[i]);  
+        str = ft_strjoin_char(str, global_data->cmd[i]);  
     }
     str = ft_strjoin_char(str, '\0');
-    free(data->cmd);
+    free(global_data->cmd);
     return (str);
 }
 
-int ft_filtre(t_data *data)
+t_list *ft_filtre(t_list **list)
 {
-    data->cmd = ft_strtrim(data->cmd, " \t");
-    if (filtre_1(data))
-        return (data->status);
-    solve_between_quote(data);
-    data->cmd = new_cmd(data);
-    if (!data->cmd)
-        return (1);
-    ft_fill_tokens(data); 
+    *list = NULL;
+    global_data->cmd = ft_strtrim(global_data->cmd, " \t");
+    if (filtre_1())
+        return (global_data->exit_status);
+    solve_between_quote();
+    global_data->cmd = new_cmd();
+    if (!global_data->cmd)
+        return (NULL);
+    printf("--> cmd : %s\n", global_data->cmd);
+    ft_fill_tokens(list);
     return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 12:52:08 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/24 15:23:21 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/30 11:15:36 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void    execute_builtins(t_data *data, t_list *list)
     if (ft_strcmp(list->cmd_args[0], "cd") == 0)
         cd(list->cmd_args, data->my_env);
     else if (ft_strcmp(list->cmd_args[0], "echo") == 0)
-        echo(list->cmd_args);
+        echo(list);
     else if (ft_strcmp(list->cmd_args[0], "pwd") == 0)
         pwd();
     else if (ft_strcmp(list->cmd_args[0], "export") == 0)
