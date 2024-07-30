@@ -6,7 +6,7 @@
 /*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:40:49 by tiima             #+#    #+#             */
-/*   Updated: 2024/07/26 08:51:03 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/07/29 14:41:52 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int main(int ac, char **av, char **env)
     {
         signal(SIGINT, &ft_handler);
         data->cmd = readline("\x1b[32mminishell $> \x1b[0m");
-        printf("%s\n", data->cmd);
         if (!data->cmd)
         {
             printf("exit\n");
@@ -61,6 +60,7 @@ int main(int ac, char **av, char **env)
             continue;
         }
         execute(data);
+        printf("%x\n", -2);
         // printf("ana hna\n");
         free(data->cmd);
         ft_free_struct(&data);

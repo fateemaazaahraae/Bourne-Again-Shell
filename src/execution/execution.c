@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 12:16:28 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/24 17:19:12 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/26 09:05:14 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void execute(t_data *data)
             open_pipes(pipe_fd);
         if (is_builtins(data->list->cmd_args[0]))
         {
-            redirection(data->list, pipe_fd);
+            // redirection(data->list, pipe_fd);
             execute_builtins(data, data->list);
         }
         else

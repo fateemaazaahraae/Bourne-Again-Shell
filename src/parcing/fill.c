@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:49:00 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/07/25 12:37:44 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/29 11:28:20 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void    ft_fill_tokens(t_data *data)
         free(str[i]);
     }
     free(str);
-    // return_pipe(data);
     fill_mini_tokens(data);
     return_special_char(data);
     fill_cmd_args(data);

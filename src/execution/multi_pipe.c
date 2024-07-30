@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multi_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 14:18:25 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/25 10:26:31 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/26 09:08:20 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,10 @@ void here_doc(t_list *list)
 
 void handle_child_process(t_data *data, t_list *list, int fd_in, int pipe_fd[2])
 {
-    if (fd_in != 0)
-    {
-        dup2(fd_in, 0);
-        close(fd_in);
-    }
-    if (data->list->next)
-    {
-        dup2(pipe_fd[1], 1);
-        close(pipe_fd[1]);
-    }
-    redirection(list, pipe_fd);
+    (void)list;
+    (void)fd_in;
+    (void)pipe_fd;
+    // redirection(list, pipe_fd);
     ft_execve(data);
     exit(EXIT_SUCCESS);
 }
