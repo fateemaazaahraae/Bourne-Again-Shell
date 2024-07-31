@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:35:04 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/30 20:24:37 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/31 13:08:09 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void    exit_func(t_error err, char *cmd)
         ft_putendl_fd("minishell: error in execve", STDERR_FILENO);
     if (err == HOME_NOT_SET)
         ft_putendl_fd("minishell: cd: HOME not set", STDERR_FILENO);
-    if (err = CD_TOO_ARGS)
+    if (err == CD_TOO_ARGS)
         ft_putendl_fd("minishell: cd : too many arguments", STDERR_FILENO);
     if (err == OLDPWD_NOT_SET)
         ft_putendl_fd("minishell: cd: OLDPWD not set", STDERR_FILENO);
@@ -42,6 +42,20 @@ void    exit_func(t_error err, char *cmd)
     {
         ft_putstr_fd("minishell: ", STDERR_FILENO);
         ft_putstr_fd(cmd, STDERR_FILENO);
-        ft_putendl_fd(" No such file or directory", STDERR_FILENO);
+        ft_putendl_fd(": No such file or directory", STDERR_FILENO);
+    }
+    if (err == NUM_ARGS)
+        ft_putendl_fd("minishell: no args needed", STDERR_FILENO);
+    if (err == ENV_ERR)
+    {
+        ft_putstr_fd("minishell: env: ’", STDERR_FILENO);
+        ft_putstr_fd(cmd, STDERR_FILENO);
+        ft_putendl_fd("’: No such file or directory", STDERR_FILENO);
+    }
+    if (err == EXPORT_ERR)
+    {
+        ft_putstr_fd("minishell: export: `", STDERR_FILENO);
+        ft_putstr_fd(cmd, STDERR_FILENO);
+        ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
     }
 }

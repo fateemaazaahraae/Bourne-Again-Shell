@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:40:49 by tiima             #+#    #+#             */
-/*   Updated: 2024/07/30 19:26:36 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/31 11:55:28 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int init_program(char **av, int ac, char **envp)
     global_data = malloc(sizeof(t_global));
     global_data->my_env = get_env(envp);
     global_data->exit_status = 0;
+    global_data->pwd = NULL;
     if (ac != 1)
     {
        exit_func(NUM_ARGS, av[1]);
@@ -43,7 +44,7 @@ void    ft_handler(int x)
 int main(int ac, char **av, char **env)
 {
     t_list  *list;
-;
+
     init_program(av, ac, env);
     while (1)
     {
@@ -62,7 +63,7 @@ int main(int ac, char **av, char **env)
             continue;
         }
         execution(list);
-        ft_free_struct(&list);
+        // ft_free_struct(&list);
     }
     return (global_data->exit_status);
 }

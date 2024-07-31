@@ -1,27 +1,22 @@
-# include "unistd.h"
+#include <stdio.h>
 
-void	ft_putchar(char c)
+int ft_strncmp(char *s1, char *s2, unsigned int n)
 {
-	write(1, &c, 1);
+    int    i;
+
+    i = 0;
+    while (s1[i] && s2[i] && i < (n - 1))
+    {
+        if (s1[i] != s2[i])
+            return (s1[i] - s2[i]);
+        i++;
+    }
+    return (s1[i] - s2[i]);
 }
-
-void	ft_putnbr(int i)
+int main()
 {
-	if (i >= 10)
-		ft_putnbr(i / 10);
-	ft_putchar((i % 10) + '0');
-}
-
-int main (int ac, char **av)
-{
-	int i = 0;
-	while (i <= 10)
-	{
-		if (i % 2 == 0)
-			ft_putnbr(i * 2);
-		else
-			ft_putnbr(i);
-		write(1, "\n",1);
-		i++;
-	}
+    // int n = 3;
+    char s1[] = "ayoub";
+    char s2[] = "ayok";
+    printf ("%d", ft_strncmp(s1, s2, 2));
 }

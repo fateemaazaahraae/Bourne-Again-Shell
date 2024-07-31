@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:11:04 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/24 15:21:01 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/31 09:54:48 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 void    pwd()
 {
-    char pwd[1000];
+    char *path;
 
-    if (getcwd(pwd, sizeof(pwd)))
-        printf("%s\n", pwd);
-    else
-        perror("getcwd");
+    path = getcwd(NULL, 0);
+    if (!path)
+        path = global_data->pwd;
+    printf("%s\n", path);
+    if (path != global_data->pwd)
+        free(path);
 }

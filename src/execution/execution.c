@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 12:16:28 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/30 19:27:40 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/31 12:26:53 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void    execution(t_list *list)
     save_stdio(&stdin, &stdout);
     if (ft_lstsize(list) == 1 && is_builtins(list->cmd_args[0]))
     {
+        if (list->infile == -1 || list->outfile == -1)
+            return ;
         execute_builtins(list);
         restore_stdio(stdin, stdout);
         return ;

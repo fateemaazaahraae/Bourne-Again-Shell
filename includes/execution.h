@@ -24,7 +24,9 @@ typedef enum s_error
     CD_TOO_ARGS,
     HOME_NOT_SET,
     OLDPWD_NOT_SET,
-    CHDIR
+    CHDIR,
+    ENV_ERR,
+    EXPORT_ERR
 }   t_error;
 
 
@@ -34,7 +36,7 @@ int nb_args(char **args);
 int echo(t_list *list);
 
 /* --cd.c-- */
-void    cd(char **args, t_env *env);
+void cd(char **args);
 void    update_old_pwd(t_env *env);
 void    go_to_home(t_env *env);
 void    update_pwd(t_env *env);
@@ -43,14 +45,14 @@ void    update_pwd(t_env *env);
 void    pwd();
 
 /* --env.c-- */
-void    env(t_env *env);
+void    env(char **args);
 
 /* --unset.c-- */
 void    unset_var(t_env **env, char *key);
 void    unset(char **args, t_env *env);
 
 /* --export.c-- */
-void    export(char **args, t_env *env);
+void    export(char **args);
 void	print_sorted_env(t_env *head);
 
 
@@ -69,6 +71,7 @@ t_env	*ft_lstnew2(char *name, char *value);
 t_env	*ft_lstlast2(t_env *lst);
 void	ft_lstadd_back2(t_env **lst, t_env *new);
 void	ft_lstdelone2(t_env *lst);
+char	*find_key_env(char *key);
 
 /* --env_to_2D.c-- */
 char **env_to_2D(t_env *env);

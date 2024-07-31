@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:35:41 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/22 08:56:08 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/31 12:29:47 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	duplicate_env(t_env *head, t_env **tmp)
 void	print_sorted_env(t_env *head)
 {
 	int		swap;
-	t_env	*cur;
+	t_env	*current;
 	t_env	*tmp;
 
 	if (!head || !head->next)
@@ -82,17 +82,17 @@ void	print_sorted_env(t_env *head)
 	while (swap)
 	{
 		swap = 0;
-		cur = tmp;
-		while (cur->next)
+		current = tmp;
+		while (current->next)
 		{
-			if (ft_strcmp(cur->key, cur->next->key) > 0)
+			if (ft_strcmp(current->key, current->next->key) > 0)
 			{
-				swap_node(cur, cur->next);
+				swap_node(current, current->next);
 				swap = 1;
 			}
-			cur = cur->next;
+			current = current->next;
 		}
 	}
-	cur = tmp;
-	print_env(cur);
+	current = tmp;
+	print_env(current);
 }

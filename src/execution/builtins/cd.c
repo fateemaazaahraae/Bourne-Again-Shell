@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 15:40:55 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/30 20:26:57 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/31 09:54:50 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
-void	set_val_key(char *key, char *value)
+void	set_value_env(char *key, char *value)
 {
 	t_env	*env;
 
@@ -103,8 +94,9 @@ void	set_val_key(char *key, char *value)
 		{
 			if (env->value)
 				free(env->value);
-			env->value = "";
+            env->value = "";
 			env->value = ft_strjoin(env->value, value);
+            return ;
 		}
 		env = env->next;
 	}
@@ -114,7 +106,8 @@ char *new_cwd_env(char *str)
 {
     char *path;
 
-    if (!str)
+    path = NULL;
+    if (!str || str[0] == '~')
     {
         path = find_key_env("HOME");
         if (!path)
@@ -134,7 +127,9 @@ char *new_cwd_env(char *str)
             return (NULL);
         }
     }
-    return (str);
+    if (!path)
+        path = str;
+    return (path);
 }
 
 void    handle_path(char *str)
@@ -142,8 +137,7 @@ void    handle_path(char *str)
     char *cwd;
     char *new_cwd;
 
-    cwd = NULL;
-    cwd = getcwd(cwd, sizeof(cwd));
+    cwd = getcwd(NULL, 0);
     new_cwd = new_cwd_env(str);
     if (!new_cwd)
         return ;
@@ -152,11 +146,17 @@ void    handle_path(char *str)
         global_data->exit_status = 1;
         exit_func(CHDIR, new_cwd);
         free(new_cwd);
-        return ;
     }
     set_value_env("OLDPWD", cwd);
     if (cwd)
         free(cwd);
+    cwd = getcwd(NULL, 0);
+    set_value_env("PWD", cwd);
+    if (global_data->pwd)
+        free(global_data->pwd);
+    global_data->pwd = cwd;
+    if (str && !ft_strcmp(str, "-"))
+        pwd();
 }
 
 
@@ -165,7 +165,9 @@ void cd(char **args)
     if (args[2])
     {
         exit_func(CD_TOO_ARGS, NULL);
-        exit(1);
+        return ;
     }
+    if (!args[1])
+        args[1] = NULL;
     handle_path(args[1]);
 }
