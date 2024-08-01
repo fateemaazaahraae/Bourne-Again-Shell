@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 12:52:08 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/31 12:49:31 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/31 19:36:33 by tiima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void    execute_builtins(t_list *list)
     else if (ft_strcmp(list->cmd_args[0], "pwd") == 0) // done
         pwd();
     else if (ft_strcmp(list->cmd_args[0], "export") == 0)
-        export(list->cmd_args, global_data->my_env);
+        export(list->cmd_args);
     else if (ft_strcmp(list->cmd_args[0], "unset") == 0)
         unset(list->cmd_args, global_data->my_env);
     else if (ft_strcmp(list->cmd_args[0], "env") == 0) // done

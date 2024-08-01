@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:29:38 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/31 12:49:08 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/07/31 19:03:42 by tiima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ void    print_env()
 void    env(char **args)
 {
     if (!args[1])
-    {
         print_env();
-    }
     else
     {
         global_data->exit_status = 127;

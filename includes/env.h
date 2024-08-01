@@ -4,8 +4,9 @@
 # include "minishell.h"
 
 typedef struct s_env{
-    char *key;
-    char *value;
+    char    *key;
+    char    *value;
+    char    op;
     struct s_env *next;
 }   t_env;
 

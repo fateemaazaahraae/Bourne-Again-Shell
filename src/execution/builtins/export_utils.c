@@ -3,96 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/21 18:35:41 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/07/31 12:29:47 by fbazaz           ###   ########.fr       */
+/*   Created: 2024/07/31 18:38:44 by tiima             #+#    #+#             */
+/*   Updated: 2024/07/31 19:34:45 by tiima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../../includes/minishell.h"
 
-static void	swap_node(t_env *node1, t_env *node2)
+t_env   *get_if_exist(t_env **env, t_env *new)
 {
-	char	*tmp_env;
-	char	*tmp_val;
+    t_env *tmp;
 
-	tmp_env = node1->key;
-	tmp_val = node1->value;
-	node1->key = node2->key;
-	node1->value = node2->value;
-	node2->key = tmp_env;
-	node2->value = tmp_val;
+    tmp = *env;
+    while (tmp)
+    {
+        if (!ft_strcmp(tmp->key, new->key))
+            return (tmp);
+        tmp = tmp->next;
+    }
+    return (NULL);
 }
 
-static void	free_env(t_env	*env)
+void    lst_addexport(t_env **env, t_env *new)
 {
-	t_env	*env2;
+    t_env *exist;
 
-	while (env)
-	{
-		if (env->value)
-			free(env->value);
-		free(env->key);
-		env2 = env->next;
-		free(env);
-		env = env2;
-	}
-}
-
-static void	print_env(t_env *env)
-{
-	t_env	*env2;
-
-	env2 = env;
-	while (env2)
-	{
-		if (!env2->value)
-			printf("declare -x %s\n", env2->key);
-		else
-			printf("declare -x %s=\"%s\"\n", env2->key, env2->value);
-		env2 = env2->next;
-	}
-	free_env(env);
-}
-
-static void	duplicate_env(t_env *head, t_env **tmp)
-{
-	t_env	*h;
-
-	h = head;
-	while (h)
-	{
-		ft_lstadd_back2(tmp, ft_lstnew2(h->key, h->value));
-		h = h->next;
-	}
-}
-
-void	print_sorted_env(t_env *head)
-{
-	int		swap;
-	t_env	*current;
-	t_env	*tmp;
-
-	if (!head || !head->next)
-		return ;
-	swap = 1;
-	tmp = NULL;
-	duplicate_env(head, &tmp);
-	while (swap)
-	{
-		swap = 0;
-		current = tmp;
-		while (current->next)
-		{
-			if (ft_strcmp(current->key, current->next->key) > 0)
-			{
-				swap_node(current, current->next);
-				swap = 1;
-			}
-			current = current->next;
-		}
-	}
-	current = tmp;
-	print_env(current);
+    if (!new)
+        return ;
+    exist = get_if_exist(env, new);
+    if (exist)
+    {
+        if (new->op == '=')
+        {
+            free(exist->value);
+            exist->value = new->value;
+        }
+        else if (new->op == '+')
+            exist->value = ft_strjoin(exist->value, new->value);
+        free(new->key);
+        free(new);
+    }
+    else
+        ft_lstadd_back2(env, new);
 }

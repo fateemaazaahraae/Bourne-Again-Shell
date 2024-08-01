@@ -54,6 +54,8 @@ void    unset(char **args, t_env *env);
 /* --export.c-- */
 void    export(char **args);
 void	print_sorted_env(t_env *head);
+void    lst_addexport(t_env **env, t_env *new);
+
 
 
 /* ----------------------ENV------------------------ */

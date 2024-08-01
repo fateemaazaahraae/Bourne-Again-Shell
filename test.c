@@ -1,22 +1,30 @@
 #include <stdio.h>
 
-int ft_strncmp(char *s1, char *s2, unsigned int n)
-{
-    int    i;
 
-    i = 0;
-    while (s1[i] && s2[i] && i < (n - 1))
-    {
-        if (s1[i] != s2[i])
-            return (s1[i] - s2[i]);
-        i++;
-    }
-    return (s1[i] - s2[i]);
-}
-int main()
+
+unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 {
-    // int n = 3;
-    char s1[] = "ayoub";
-    char s2[] = "ayok";
-    printf ("%d", ft_strncmp(s1, s2, 2));
+	unsigned int	i;
+	unsigned int	j;
+
+	i = 0;
+	j = 0;
+	while (src[j])
+		j++;
+	if (size == 0)
+		return (j);
+	while (src[i] != '\0' && i < size - 1)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (j);
+}
+int main(void)
+{
+    char src[] = "Hello, World!";
+    char dest[20];
+
+    printf("src: %s /// dest: %s /// src_size: %u\n", src, dest,ft_strlcpy(dest, src, 10));
 }
