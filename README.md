@@ -46,7 +46,7 @@ foreground pipeline.</li>
     </ul>
   </li>
 </ul>
-<h4>You should limit yourself to the subject description. Anything that is not asked is not required. If you have any doubt about a requirement, take <link rel="bash" href="https://www.gnu.org/savannah-checkouts/gnu/bash/manual/"> as a reference.</h4>
+<h4>⚠️ You should limit yourself to the subject description. Anything that is not asked is not required. If you have any doubt about a requirement, take <link rel="bash" href="https://www.gnu.org/savannah-checkouts/gnu/bash/manual/"> as a reference.</h4>
 
 <h3>Bonus Part :</h3>
 <ul>Your program has to implement:
