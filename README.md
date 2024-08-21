@@ -45,8 +45,13 @@ foreground pipeline.</li>
       <li>exit with no options</li>
     </ul>
   </li>
-  <p>You should limit yourself to the subject description. Anything that is not asked is not required. If you have any doubt about a requirement, take <link rel="bash" href="https://www.gnu.org/savannah-checkouts/gnu/bash/manual/"> as a reference.</p>
+</ul>
+<h4>You should limit yourself to the subject description. Anything that is not asked is not required. If you have any doubt about a requirement, take <link rel="bash" href="https://www.gnu.org/savannah-checkouts/gnu/bash/manual/"> as a reference.</h4>
 
+<h3>Bonus Part :</h3>
+<ul>Your program has to implement:
+  <li> && and || with parenthesis for priorities.</li>
+  <li>Wildcards * should work for the current working directory.</li>
 </ul>
 <br><br>
 
