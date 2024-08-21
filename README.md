@@ -54,5 +54,5 @@ foreground pipeline.</li>
   <li>Wildcards * should work for the current working directory.</li>
 </ul>
 <br><br>
-
 <h1>💯 Final Grade : </h1> <br>
+<img width="269" alt="Screen Shot 2024-03-06 at 11 41 17 AM" src="https://github.com/user-attachments/assets/f4644b10-184e-4f80-9668-75abd535e4bc">
