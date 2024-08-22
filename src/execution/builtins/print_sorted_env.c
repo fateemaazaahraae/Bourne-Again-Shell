@@ -6,13 +6,13 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:35:41 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/08/17 19:23:21 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/08/22 11:38:02 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-static void	swap_node(t_env *node1, t_env *node2)
+void	swap_node(t_env *node1, t_env *node2)
 {
 	char	*tmp_env;
 	char	*tmp_val;
@@ -25,7 +25,7 @@ static void	swap_node(t_env *node1, t_env *node2)
 	node2->value = tmp_val;
 }
 
-static void	free_env(t_env *env)
+void	free_env(t_env *env)
 {
 	t_env	*env2;
 
@@ -40,7 +40,7 @@ static void	free_env(t_env *env)
 	}
 }
 
-static void	print_env(t_env *env)
+void	print_env(t_env *env)
 {
 	t_env	*env2;
 
@@ -61,7 +61,7 @@ static void	print_env(t_env *env)
 	free_env(env);
 }
 
-static void	duplicate_env(t_env *head, t_env **tmp)
+void	duplicate_env(t_env *head, t_env **tmp)
 {
 	t_env	*h;
 

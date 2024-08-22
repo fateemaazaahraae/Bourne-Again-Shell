@@ -6,13 +6,13 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:38:00 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/08/21 09:28:20 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/08/22 11:33:06 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	count_args(char **mini_tokens)
+int	count_args(char **mini_tokens)
 {
 	int	i;
 	int	len;
@@ -32,7 +32,7 @@ static int	count_args(char **mini_tokens)
 	return (len);
 }
 
-static int	handle_args_and_redir(t_list *tmp)
+int	handle_args_and_redir(t_list *tmp)
 {
 	int	i;
 	int	j;

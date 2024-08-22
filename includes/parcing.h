@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parcing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 19:16:03 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/08/18 18:36:06 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/08/22 11:36:25 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,51 +23,74 @@
 # include <unistd.h>
 
 /* -------------------------------PARCING--------------------------------*/
-void	split_tokens(t_list **p_tokens);
-t_list	*ft_fill_tokens(void);
-int		fill_mini_tokens(t_list *list);
-int		print_error(char c, char x);
-int		check_synthax(void);
-void	ft_free_struct(t_list **list);
-void	solve_pipe_problem(char *str);
-void	solve_between_quote(void);
-int		check_synthax_error(char *str);
-int		is_all_space(char *str);
-void	check_pipe(char *str, char *check);
-t_list	*ft_filtre(void);
-int		filtre_1(void);
-char	*new_cmd(void);
-char	*ft_strjoin_char(char *s1, char c);
-void	return_special_char(t_list *list);
-int		fill_cmd_args(t_list *list);
-int		handle_here_doc(t_list *tmp, int i);
-int		last_here_doc(char **args, int i);
-void	handle_input_output(t_list *tmp, char **args, int i);
-void	ft_lstadd_back_redir(t_redir **redir, t_redir *new);
-t_redir	*ft_lstlast_redir(t_redir *redir);
-t_redir	*ft_lstnew_redir(char *name, int flag);
+
+/* --redir_lst_utils.c-- */
 void	ft_lstclear_redir(t_redir **lst);
+t_redir	*ft_lstnew_redir(char *name, int flag);
+t_redir	*ft_lstlast_redir(t_redir *redir);
 int		ft_lstsize_redir(t_redir *redir);
-int		expand(int *i, char **str, char *content);
-void	join_single_quote(int *i, char **str, char *content);
-void	handle_expand(t_list *list);
-int		handle_here_doc_expand(int *i, char **str, char *content);
-int		here_doc_vs_expand(int i, char *content);
-void	remove_quotes(t_list *list);
-int		init_program(char **av, int ac, char **envp);
-int		is_special(char c, int flag);
-void	solve_here_doc(int *i, char **str);
-void	handle_ambigous(int start, int end, char **str, char *content);
-char	*remove_quote_from_lim(char *name, int *lim_flag);
-int		handle_last_exit_status(char **str, char c);
-void	ft_norm(t_list *list, int i, int *j, char **str);
-char	*generate_filename(char *arr);
-char	*filename(char *file);
-void	fre(void *p);
-char	*ft_join(char *s1, char *s2);
+void	ft_lstadd_back_redir(t_redir **redir, t_redir *new);
+
+/* --parcing_utils.c-- */
+char	*ft_strdup_char(char c);
+char	*ft_strjoin_char(char *s1, char c);
+
+/* --open_here_doc.c-- */
+void	ft_expand(int *i, char **str, char *line);
+char	*expand_in_here_doc(char *line);
+void	sig_here_doc(int num);
 void	ctrl_c(t_redir *node);
-void	ft_handler(int x);
-int		free_env_ctrl_d(t_env **env);
+int		here_doc(t_redir *node);
+
+/* --here_doc_utils.c-- */
+char	*filename(char *file);
+char	*generate_filename(char *arr);
+
+/* --ft_parcing.c-- */
+int		filtre_1(void);
+int		is_special(char c, int flag);
+void	solve_between_quote(void);
+char	*new_cmd(void);
+t_list	*ft_filtre(void);
+
+/* --fill.c-- */
 void	handle_special_char(char *str);
+int		fill_mini_tokens(t_list *list);
+t_list	*ft_fill_tokens(void);
+void	return_from_files(t_list *list, int x, t_redir *files);
+void	return_special_char(t_list *list);
+
+/* --fill_cmd_args.c-- */
+int		fill_cmd_args(t_list *list);
+int		handle_args_and_redir(t_list *tmp);
+int		count_args(char **mini_tokens);
+
+/* --files.c-- */
+int		handle_here_doc(t_list *tmp, int i);
+void	handle_input_output(t_list *tmp, char **args, int i);
+void	solve_here_doc(int *i, char **str);
+
+/* --check_quote.c-- */
+void	handle_quote(char *token, int *j, char **str);
+void	ft_norm(t_list *list, int i, int *j, char **str);
+void	remove_quotes(t_list *tmp);
+char	*remove_quote_from_lim(char *name, int *lim_flag);
+
+/* --expand.c-- */
+void	join_single_quote(int *i, char **str, char *content);
+int		expand(int *i, char **str, char *content);
+void	handle_expand(t_list *list);
+
+/* --expand_utils.c-- */
+char	*ft_join(char *s1, char *s2);
+int		here_doc_vs_expand(int i, char *content);
+int		handle_here_doc_expand(int *i, char **str, char *content);
+void	handle_ambigous(int start, int end, char **str, char *content);
+int		handle_last_exit_status(char **str, char c);
+
+/* --errors.c-- */
+int		is_oper(char c);
+int		check_synthax(void);
+int		print_error(char c, char x);
 
 #endif

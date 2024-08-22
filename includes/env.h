@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 19:15:49 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/08/17 19:15:50 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/08/22 11:08:31 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ typedef struct s_env
 	struct s_env	*next;
 }					t_env;
 
+/* ----------------------ENV------------------------ */
 /* --env_to_2D.c-- */
 char				**env_to_2d(t_env *env);
 
 /* --get_env.c-- */
 t_env				*get_env(char **env);
+void				handle_env_i(t_env **head);
 int					ft_lstsize2(t_env *lst);
 
 /* --get_env_utils.c-- */

@@ -6,13 +6,13 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:29:38 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/08/17 19:16:57 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/08/22 11:37:55 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-void	print_env(void)
+void	print_env2(void)
 {
 	t_env	*env;
 
@@ -37,7 +37,7 @@ void	print_env(void)
 void	env(char **args)
 {
 	if (!args[1])
-		print_env();
+		print_env2();
 	else
 	{
 		g_data->exit_status = 127;

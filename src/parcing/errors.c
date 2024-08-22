@@ -6,13 +6,13 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 10:13:31 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/08/16 10:38:28 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/08/22 11:35:54 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	is_oper(char c)
+int	is_oper(char c)
 {
 	char	*oper;
 	int		i;
